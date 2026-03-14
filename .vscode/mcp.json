@@ -1,0 +1,13 @@
+{
+	"servers": {
+		"supabase": {
+			"type": "http",
+			"url": "https://mcp.supabase.com/mcp"
+		},
+		"my-mcp-server-3d0c184e": {
+			"url": "https://mcp.supabase.com/mcp?project_ref=jcaqzhntujhczdlgoejp",
+			"type": "http"
+		}
+	},
+	"inputs": []
+}
