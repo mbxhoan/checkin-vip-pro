@@ -37,11 +37,23 @@ Tai lieu nay map route hien tai sang module va phase migration. Muc tieu la tran
 | `admin.logs` | System logs | 8 |
 | `admin.users.*` | Users | 2 |
 | `admin.media.*` | Media | 8 |
+| `/rbac` and `/rbac/*` | RBAC admin console | 2 |
+| `/` | Foundation dashboard shell | 1 |
+| `/workspace` | Workspace shell | 1 |
+| `/audience` | Audience shell | 1 |
+| `/experience` | Experience shell | 1 |
+| `/engagement` | Engagement shell | 1 |
+| `/system` | System shell | 1 |
+| `/system/template-vault` | Template vault | 1 |
 
 ## 2. Public web
 
 | Route pattern | Module | Phase de xuat |
 |---|---|---|
+| `/auth/sign-in` | Auth | 1 |
+| `/auth/sign-up` | Auth | 1 |
+| `/auth/forgot-password` | Auth | 1 |
+| `/auth/reset-password` | Auth | 1 |
 | `/register/{slug}` | Landing page registration | 4 |
 | `/register/{slug}/success/{qrcode}` | Registration success | 4 |
 | `/clients/generate/id/{id}` | Public QR generation | 4 |
@@ -52,7 +64,21 @@ Tai lieu nay map route hien tai sang module va phase migration. Muc tieu la tran
 | `/privacy-policy` | Legal | 1 |
 | `/payment-refund-policy` | Legal | 1 |
 
-## 3. Scan app
+## 3. Archived template routes preserved in vault
+
+| Route pattern | Module | Notes |
+|---|---|---|
+| `/calendar` | Archived dashboard demo | Kept for reuse and comparison, hidden from primary nav |
+| `/charts/basic-chart` | Archived dashboard demo | Kept for reuse and comparison, hidden from primary nav |
+| `/tables` | Archived dashboard demo | Kept for reuse and comparison, hidden from primary nav |
+| `/forms/form-elements` | Archived form demo | Kept for reuse and comparison, hidden from primary nav |
+| `/forms/form-layout` | Archived form demo | Kept for reuse and comparison, hidden from primary nav |
+| `/ui-elements/alerts` | Archived UI demo | Kept for reuse and comparison, hidden from primary nav |
+| `/ui-elements/buttons` | Archived UI demo | Kept for reuse and comparison, hidden from primary nav |
+| `/profile` | Archived account template | Kept for reuse and comparison, hidden from primary nav |
+| `/pages/settings` | Archived account template | Kept for reuse and comparison, hidden from primary nav |
+
+## 4. Scan app
 
 | Route pattern | Module | Phase de xuat |
 |---|---|---|
@@ -64,7 +90,7 @@ Tai lieu nay map route hien tai sang module va phase migration. Muc tieu la tran
 | `/sync-offline` | Offline sync | 3 |
 | `/render-label/{label}` | On-site print render | 6 |
 
-## 4. Rule su dung tai lieu nay
+## 5. Rule su dung tai lieu nay
 
 - Moi module UI moi phai confirm da cover het route trong bang.
 - Moi route chua duoc migrate phai co fallback sang UI cu hoac shell cu.

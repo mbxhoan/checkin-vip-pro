@@ -1,11 +1,15 @@
 "use client";
 import { EmailIcon, PasswordIcon } from "@/assets/icons";
+import { getSupabaseBrowserClient } from "@/lib/supabase/browser";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import InputGroup from "../FormElements/InputGroup";
 import { Checkbox } from "../FormElements/checkbox";
 
 export default function SigninWithPassword() {
+  const router = useRouter();
+  const supabase = getSupabaseBrowserClient();
   const [data, setData] = useState({
     email: process.env.NEXT_PUBLIC_DEMO_USER_MAIL || "",
     password: process.env.NEXT_PUBLIC_DEMO_USER_PASS || "",
@@ -13,6 +17,7 @@ export default function SigninWithPassword() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({
@@ -21,15 +26,25 @@ export default function SigninWithPassword() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // You can remove this code block
     setLoading(true);
+    setErrorMessage(null);
 
-    setTimeout(() => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: data.email,
+      password: data.password,
+    });
+
+    if (error) {
+      setErrorMessage(error.message);
       setLoading(false);
-    }, 1000);
+      return;
+    }
+
+    router.refresh();
+    router.push("/");
   };
 
   return (
@@ -82,6 +97,7 @@ export default function SigninWithPassword() {
       <div className="mb-4.5">
         <button
           type="submit"
+          disabled={loading}
           className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary p-4 font-medium text-white transition hover:bg-opacity-90"
         >
           Sign In
@@ -90,6 +106,12 @@ export default function SigninWithPassword() {
           )}
         </button>
       </div>
+
+      {errorMessage ? (
+        <p className="text-sm font-medium text-rose-600 dark:text-rose-400">
+          {errorMessage}
+        </p>
+      ) : null}
     </form>
   );
 }

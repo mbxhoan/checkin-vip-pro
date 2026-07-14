@@ -17,12 +17,15 @@ Dung file nay cung voi `_parity-checklist-template.md`.
 
 | Module | Phase | Status | Legacy refs | New owner | RBAC | Schema | Parity checklist | Verify | Notes/Risks |
 |---|---|---|---|---|---|---|---|---|---|
-| Foundation shell | 1 | NS | admin shell, public shell, scan shell |  |  |  |  |  |  |
-| Auth and session | 1 | NS | auth routes, users |  |  |  |  |  |  |
-| Legal/footer | 1 | NS | terms/privacy/payment/footer |  |  |  |  |  |  |
-| RBAC core | 2 | NS | users, roles, policies, role middleware |  |  |  |  |  |  |
-| Company | 2 | NS | `admin.companys.*` |  |  |  |  |  |  |
-| User management | 2 | NS | `admin.users.*` |  |  |  |  |  |  |
+| Foundation shell | 1 | DN | admin shell, public shell, scan shell | Codex (2026-04-07) | Giltech shell layout, branded sidebar/header, permission gate primitive, foundation dashboard page, shell lane navigation | `src/app/layout.tsx`, `src/app/(home)/page.tsx`, `src/components/Layouts/header/index.tsx`, `src/components/Layouts/sidebar/data/index.ts`, `src/components/Layouts/footer/index.tsx`, `src/components/rbac/permission-guard.tsx` | `docs/init/foundation-shell-parity-checklist.md` | local lint + build | Root shell no longer renders the NextAdmin template; workspace/audience/experience/engagement/system shell pages now live and remaining feature modules still need their own UX rewrite |
+| Shell module surfaces | 1 | DN | workspace, audience, experience, engagement, system shell lanes | Codex (2026-04-07) | Branded lane landing pages for the target architecture contexts | `src/app/workspace/page.tsx`, `src/app/audience/page.tsx`, `src/app/experience/page.tsx`, `src/app/engagement/page.tsx`, `src/app/system/page.tsx`, `src/lib/shell/module-pages.ts`, `src/components/shell/module-landing.tsx` | `docs/init/shell-module-parity-checklist.md` | local lint + build | Shell lanes are live; actual business feature screens inside each lane still need their own rewrite |
+| Template vault | 1 | DN | legacy demo routes, profile/settings demo pages, reusable template components | Codex (2026-04-07) | Archived storage surface for demo routes and reusable UI families | `src/app/system/template-vault/page.tsx`, `src/components/template-vault/template-vault-page.tsx`, `src/lib/shell/template-vault.ts` | `docs/init/shell-module-parity-checklist.md` | local lint + build | Demo routes are hidden from primary navigation but remain accessible from the vault |
+| Auth and session | 1 | IP | auth routes, users | Codex (2026-04-07) | Supabase auth bootstrap, sign-in, sign-up, forgot/reset password, session provider, sign-out, public.users mapping | `src/lib/auth/bootstrap.ts`, `src/components/Auth/session-provider.tsx`, `src/app/auth/sign-in/page.tsx`, `src/app/auth/sign-up/page.tsx`, `src/app/auth/forgot-password/page.tsx`, `src/app/auth/reset-password/page.tsx` | `docs/init/brand-migration-checklist.md` | local lint + build | Auth lifecycle is live; callback/provider parity on real Supabase config still needs a production smoke test |
+| Legal/footer | 1 | DN | terms/privacy/payment/footer | Codex (2026-04-07) | Branded legal pages and shell footer links | `src/app/(legal)/terms-of-use/page.tsx`, `src/app/(legal)/privacy-policy/page.tsx`, `src/app/(legal)/payment-refund-policy/page.tsx`, `src/components/Layouts/footer/index.tsx`, `src/app/layout.tsx` | `docs/init/foundation-shell-parity-checklist.md` | local lint + build | Legal shell now exists; final jurisdiction-specific copy still needs review before public release |
+| RBAC core | 2 | IP | users, roles, policies, role middleware | Codex (2026-04-07) | SQL RBAC helper RPCs, seed dataset, TS authorization contract, server-side bootstrap context, RBAC admin console mutations, baseline RLS policies, expanded RLS coverage | `supabase/migrations/20260316112756_initial_schema_foundation.sql`, `supabase/migrations/20260407143000_rbac_runtime_helpers.sql`, `supabase/migrations/20260407152000_rbac_rls_baseline.sql`, `supabase/migrations/20260407165000_rbac_runtime_rls_expansion.sql` | `docs/init/postgres-schema-foundation-parity-checklist.md` | local apply + lint + build + sanity queries + sql dry-run | Core RBAC contract, auth bridge, and mutation console are in place; broader auth/session polish and deeper parity still pending |
+| Postgres schema foundation | 2 | IP | all core legacy domains in `docs/init/*` | Codex (2026-03-16) | roles, permissions, scopes seeded in SQL | `supabase/migrations/20260316112756_initial_schema_foundation.sql`, `supabase/migrations/20260407143000_rbac_runtime_helpers.sql`, `supabase/migrations/20260407152000_rbac_rls_baseline.sql` | `docs/init/postgres-schema-foundation-parity-checklist.md` | local apply + lint + build + sanity queries + sql dry-run | Full DDL done; RBAC helper RPC + seed dataset + baseline RLS added; backfill and dual-run parity chua xong |
+| Company | 2 | IP | `admin.companys.*` | Codex (2026-04-07) | RBAC admin company edit screen + server action, plan selector, domain inventory | `src/app/rbac/companies/page.tsx`, `src/app/rbac/actions.ts`, `src/lib/rbac/admin-data.ts` | `docs/init/postgres-schema-foundation-parity-checklist.md` | local lint + build + sql dry-run | Mutation UI exists; need company/domain/subscription parity review on live data |
+| User management | 2 | IP | `admin.users.*` | Codex (2026-04-07) | RBAC admin user role assignment screen + server action, multi-scope assignment editor | `src/app/rbac/users/page.tsx`, `src/components/rbac/user-assignment-card.tsx`, `src/app/rbac/actions.ts`, `src/lib/rbac/admin-data.ts` | `docs/init/postgres-schema-foundation-parity-checklist.md` | local lint + build + sql dry-run | Mutation UI now handles scope-dependent inputs better; still needs production smoke testing |
 | Event | 2 | NS | `admin.events.*` |  |  |  |  |  |  |
 | Event settings | 2 | NS | `admin.event_settings.*` |  |  |  |  |  |  |
 | Event files/media relation | 2 | NS | `admin.event_files.*`, `admin.media.*` |  |  |  |  |  |  |
@@ -51,29 +54,29 @@ Dung file nay cung voi `_parity-checklist-template.md`.
 
 | Domain | Legacy status | Target Postgres status | Mapping done | Backfill done | Verification done | Notes |
 |---|---|---|---|---|---|---|
-| identity/users | legacy-only | NS | NS | NS | NS |  |
-| companies | legacy-only | NS | NS | NS | NS |  |
-| events | legacy-only | NS | NS | NS | NS |  |
-| clients/checkins | legacy-only | NS | NS | NS | NS |  |
-| reports query foundation | legacy-only | NS | NS | NS | NS |  |
-| campaigns/email | legacy-only | NS | NS | NS | NS |  |
-| landing pages | legacy-only | NS | NS | NS | NS |  |
-| labels/cards/print | legacy-only | NS | NS | NS | NS |  |
-| lucky draw | legacy-only | NS | NS | NS | NS |  |
-| chatbot | legacy-only | NS | NS | NS | NS |  |
+| identity/users | legacy-only | IP | IP | NS | IP | `auth.users -> public.users`, `roles`, `permissions`, `user_access_scopes` da apply va lint tren local Supabase |
+| companies | legacy-only | IP | IP | NS | IP | `companies`, `company_domains`, `subscription_plans`, `company_subscriptions` |
+| events | legacy-only | IP | IP | NS | IP | `events`, `event_settings`, `event_areas`, `event_files`, `custom_field_templates`, `language_defines`, `media` |
+| clients/checkins | legacy-only | IP | IP | NS | IP | `clients`, `client_backups`, `client_custom_field_values`, `scanner_devices`, `scan_offline_batches`, `checkins` |
+| reports query foundation | legacy-only | IP | IP | NS | IP | `reports`, `report_runs`; structural verify pass, parity query chua verify |
+| campaigns/email | legacy-only | IP | IP | NS | IP | `email_senders`, `email_templates`, `email_template_unlock_requests`, `campaigns`, `campaign_details`, `emails` |
+| landing pages | legacy-only | IP | IP | NS | IP | `landing_pages`, `landing_page_submissions` |
+| labels/cards/print | legacy-only | IP | IP | NS | IP | `labels`, `label_details`, `cards`, `card_details`, `printers`, `print_jobs`, `print_job_items` |
+| lucky draw | legacy-only | IP | IP | NS | IP | `audios`, `lucky_draws`, `lucky_draw_rewards`, `lucky_draw_clients`, `lucky_draw_winners` |
+| chatbot | legacy-only | IP | IP | NS | IP | `n8n_chat_sessions`, `n8n_chat_messages`, `histories`, `system_logs`, `integration_logs`, `background_jobs` |
 
 ## 4. RBAC tracker
 
 | Item | Status | Notes |
 |---|---|---|
-| Role templates defined | NS |  |
-| Permission registry approved | NS |  |
-| Scope model approved | NS |  |
-| Auth user -> profile user mapping | NS |  |
-| Server authorize helper | NS |  |
-| Frontend permission payload | NS |  |
-| RLS baseline policies | NS |  |
-| Admin role assignment UI | NS |  |
+| Role templates defined | DN | Seed role records va TS role templates da align |
+| Permission registry approved | DN | `docs/init/permission-registry.md` da phu hop voi migration va TS registry |
+| Scope model approved | DN | `user_access_scopes` + helper RPCs + TS scope contract da co |
+| Auth user -> profile user mapping | IP | Trigger `handle_auth_user_created()` da co trong migration nen |
+| Server authorize helper | DN | `current_user_has_permission()`, `user_has_permission()`, `get_user_rbac_context()` |
+| Frontend permission payload | DN | `createRbacPayload()` trong `src/lib/rbac/authorize.ts` |
+| RLS baseline policies | DN | Baseline policies da co cho core company/user/event/client/check-in/report/legal tables |
+| Admin role assignment UI | IP | Read-only RBAC console routes da co; mutation flow va assign actions chua xong |
 
 ## 5. Critical parity gates
 

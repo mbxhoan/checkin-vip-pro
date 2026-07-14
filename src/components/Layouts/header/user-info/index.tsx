@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronUpIcon } from "@/assets/icons";
+import { useAuthSession } from "@/components/Auth/session-provider";
 import {
   Dropdown,
   DropdownContent,
@@ -14,12 +15,12 @@ import { LogOutIcon, SettingsIcon, UserIcon } from "./icons";
 
 export function UserInfo() {
   const [isOpen, setIsOpen] = useState(false);
+  const { session, signOut } = useAuthSession();
 
-  const USER = {
-    name: "John Smith",
-    email: "johnson@nextadmin.com",
-    img: "/images/user/user-03.png",
-  };
+  const user = session?.profile;
+  const userName = user?.displayName ?? "Guest";
+  const userEmail = user?.email ?? "Not signed in";
+  const userAvatar = session?.authUser.avatarUrl ?? "/images/user/user-03.png";
 
   return (
     <Dropdown isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -28,15 +29,15 @@ export function UserInfo() {
 
         <figure className="flex items-center gap-3">
           <Image
-            src={USER.img}
+            src={userAvatar}
             className="size-12"
-            alt={`Avatar of ${USER.name}`}
+            alt={`Avatar of ${userName}`}
             role="presentation"
             width={200}
             height={200}
           />
           <figcaption className="flex items-center gap-1 font-medium text-dark dark:text-dark-6 max-[1024px]:sr-only">
-            <span>{USER.name}</span>
+            <span>{userName}</span>
 
             <ChevronUpIcon
               aria-hidden
@@ -58,9 +59,9 @@ export function UserInfo() {
 
         <figure className="flex items-center gap-2.5 px-5 py-3.5">
           <Image
-            src={USER.img}
+            src={userAvatar}
             className="size-12"
-            alt={`Avatar for ${USER.name}`}
+            alt={`Avatar for ${userName}`}
             role="presentation"
             width={200}
             height={200}
@@ -68,50 +69,71 @@ export function UserInfo() {
 
           <figcaption className="space-y-1 text-base font-medium">
             <div className="mb-2 leading-none text-dark dark:text-white">
-              {USER.name}
+              {userName}
             </div>
 
-            <div className="leading-none text-gray-6">{USER.email}</div>
+            <div className="leading-none text-gray-6">{userEmail}</div>
           </figcaption>
         </figure>
 
         <hr className="border-[#E8E8E8] dark:border-dark-3" />
 
         <div className="p-2 text-base text-[#4B5563] dark:text-dark-6 [&>*]:cursor-pointer">
-          <Link
-            href={"/profile"}
-            onClick={() => setIsOpen(false)}
-            className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-[9px] hover:bg-gray-2 hover:text-dark dark:hover:bg-dark-3 dark:hover:text-white"
-          >
-            <UserIcon />
+          {session ? (
+            <>
+              <Link
+                href={"/system"}
+                onClick={() => setIsOpen(false)}
+                className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-[9px] hover:bg-gray-2 hover:text-dark dark:hover:bg-dark-3 dark:hover:text-white"
+              >
+                <SettingsIcon />
 
-            <span className="mr-auto text-base font-medium">View profile</span>
-          </Link>
+                <span className="mr-auto text-base font-medium">
+                  Open system shell
+                </span>
+              </Link>
 
-          <Link
-            href={"/pages/settings"}
-            onClick={() => setIsOpen(false)}
-            className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-[9px] hover:bg-gray-2 hover:text-dark dark:hover:bg-dark-3 dark:hover:text-white"
-          >
-            <SettingsIcon />
+              <Link
+                href={"/system/template-vault"}
+                onClick={() => setIsOpen(false)}
+                className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-[9px] hover:bg-gray-2 hover:text-dark dark:hover:bg-dark-3 dark:hover:text-white"
+              >
+                <UserIcon />
 
-            <span className="mr-auto text-base font-medium">
-              Account Settings
-            </span>
-          </Link>
+                <span className="mr-auto text-base font-medium">
+                  Template vault
+                </span>
+              </Link>
+            </>
+          ) : (
+            <Link
+              href={"/auth/sign-in"}
+              onClick={() => setIsOpen(false)}
+              className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-[9px] hover:bg-gray-2 hover:text-dark dark:hover:bg-dark-3 dark:hover:text-white"
+            >
+              <UserIcon />
+
+              <span className="mr-auto text-base font-medium">Sign in</span>
+            </Link>
+          )}
         </div>
 
         <hr className="border-[#E8E8E8] dark:border-dark-3" />
 
         <div className="p-2 text-base text-[#4B5563] dark:text-dark-6">
-          <button
-            className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-[9px] hover:bg-gray-2 hover:text-dark dark:hover:bg-dark-3 dark:hover:text-white"
-            onClick={() => setIsOpen(false)}
-          >
-            <LogOutIcon />
+          {session ? (
+            <button
+              className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-[9px] hover:bg-gray-2 hover:text-dark dark:hover:bg-dark-3 dark:hover:text-white"
+              onClick={async () => {
+                setIsOpen(false);
+                await signOut();
+              }}
+            >
+              <LogOutIcon />
 
-            <span className="text-base font-medium">Log out</span>
-          </button>
+              <span className="text-base font-medium">Log out</span>
+            </button>
+          ) : null}
         </div>
       </DropdownContent>
     </Dropdown>

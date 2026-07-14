@@ -18,17 +18,17 @@ Target stack:
 - RBAC with role + permission + scope
 
 Before coding, read these files in order:
-1. docs/ui-replatform/README.md
-2. docs/ui-replatform/legacy-scope.md
-3. docs/ui-replatform/target-architecture.md
-4. docs/ui-replatform/schema-migration-strategy.md
-5. docs/ui-replatform/rbac-design.md
-6. docs/ui-replatform/permission-registry.md
-7. docs/ui-replatform/route-to-module-map.md
-8. docs/ui-replatform/delivery-playbook.md
-9. docs/ui-replatform/migration-tracker.md
-10. docs/ui-replatform/AGENTS.md
-11. docs/ui-replatform/brand-migration-checklist.md
+1. docs/init/README.md
+2. docs/init/legacy-scope.md
+3. docs/init/target-architecture.md
+4. docs/init/schema-migration-strategy.md
+5. docs/init/rbac-design.md
+6. docs/init/permission-registry.md
+7. docs/init/route-to-module-map.md
+8. docs/init/delivery-playbook.md
+9. docs/init/migration-tracker.md
+10. docs/init/AGENTS.md
+11. docs/init/brand-migration-checklist.md
 
 Operating rules:
 - Preserve business meaning and runtime parity with the legacy app.
@@ -98,8 +98,8 @@ Verification:
 Design and implement the PostgreSQL/Supabase schema for [DOMAIN_NAME].
 
 Inputs:
-- docs/ui-replatform/schema-migration-strategy.md
-- docs/ui-replatform/legacy-scope.md
+- docs/init/schema-migration-strategy.md
+- docs/init/legacy-scope.md
 - docs/ERD.md
 - docs/rag-domains/[DOMAIN_FILE].json
 
@@ -125,9 +125,9 @@ Output:
 Implement RBAC foundation for the new app.
 
 Source of truth:
-- docs/ui-replatform/rbac-design.md
-- docs/ui-replatform/permission-registry.md
-- docs/ui-replatform/AGENTS.md
+- docs/init/rbac-design.md
+- docs/init/permission-registry.md
+- docs/init/AGENTS.md
 
 Requirements:
 - support role + permission + scope
@@ -157,9 +157,9 @@ Compare:
 - runtime requirements if applicable
 
 Use:
-- docs/ui-replatform/_parity-checklist-template.md
-- docs/ui-replatform/migration-tracker.md
-- docs/ui-replatform/route-to-module-map.md
+- docs/init/_parity-checklist-template.md
+- docs/init/migration-tracker.md
+- docs/init/route-to-module-map.md
 
 Return:
 - missing behaviors
@@ -172,7 +172,7 @@ Return:
 ## 6. Prompt de update tracker
 
 ```text
-Update docs/ui-replatform/migration-tracker.md after finishing the task.
+Update docs/init/migration-tracker.md after finishing the task.
 
 You must update:
 - module status
@@ -199,12 +199,12 @@ Nhung prompt nay qua mo. Agent se nhanh chong code theo gia dinh rieng va mat pa
 Set up the new Next.js app foundation for the check-in replatform.
 
 Read:
-- docs/ui-replatform/README.md
-- docs/ui-replatform/target-architecture.md
-- docs/ui-replatform/rbac-design.md
-- docs/ui-replatform/delivery-playbook.md
-- docs/ui-replatform/AGENTS.md
-- docs/ui-replatform/brand-migration-checklist.md
+- docs/init/README.md
+- docs/init/target-architecture.md
+- docs/init/rbac-design.md
+- docs/init/delivery-playbook.md
+- docs/init/AGENTS.md
+- docs/init/brand-migration-checklist.md
 
 Build:
 - app shell
@@ -217,3 +217,20 @@ Build:
 Do not implement business modules yet beyond shell placeholders.
 Update the migration tracker when done.
 ```
+
+## 9. Trang thai thuc te hien tai
+
+Danh dau theo repo `checkin-vip-pro` hien tai:
+
+- Prompt 1: `done`
+- Prompt 2: `partial`
+- Prompt 3: `done`
+- Prompt 4: `done`
+- Prompt 5: `partial`
+- Prompt 6: `done`
+- Prompt 7: `not started` theo nghia khong dung
+- Prompt 8: `done`
+
+Ghi chu:
+- `partial` nghia la da co implementation co ban va tracker/parity note, nhung chua dong flow hoan chinh.
+- Hien tai `auth bootstrap`, `mutation screens`, `RLS expansion`, va `foundation shell` da duoc dong goi xong, nhung parity module layer van con mo o prompt 2 va 5.

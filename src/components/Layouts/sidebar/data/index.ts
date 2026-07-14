@@ -2,93 +2,68 @@ import * as Icons from "../icons";
 
 export const NAV_DATA = [
   {
-    label: "MAIN MENU",
+    label: "OVERVIEW",
     items: [
       {
         title: "Dashboard",
+        url: "/",
         icon: Icons.HomeIcon,
-        items: [
-          {
-            title: "eCommerce",
-            url: "/",
-          },
-        ],
-      },
-      {
-        title: "Calendar",
-        url: "/calendar",
-        icon: Icons.Calendar,
         items: [],
-      },
-      {
-        title: "Profile",
-        url: "/profile",
-        icon: Icons.User,
-        items: [],
-      },
-      {
-        title: "Forms",
-        icon: Icons.Alphabet,
-        items: [
-          {
-            title: "Form Elements",
-            url: "/forms/form-elements",
-          },
-          {
-            title: "Form Layout",
-            url: "/forms/form-layout",
-          },
-        ],
-      },
-      {
-        title: "Tables",
-        url: "/tables",
-        icon: Icons.Table,
-        items: [
-          {
-            title: "Tables",
-            url: "/tables",
-          },
-        ],
-      },
-      {
-        title: "Pages",
-        icon: Icons.Alphabet,
-        items: [
-          {
-            title: "Settings",
-            url: "/pages/settings",
-          },
-        ],
       },
     ],
   },
   {
-    label: "OTHERS",
+    label: "WORKSPACE",
     items: [
       {
-        title: "Charts",
-        icon: Icons.PieChart,
-        items: [
-          {
-            title: "Basic Chart",
-            url: "/charts/basic-chart",
-          },
-        ],
+        title: "Workspace",
+        url: "/workspace",
+        icon: Icons.Workspace,
+        items: [],
       },
+    ],
+  },
+  {
+    label: "AUDIENCE",
+    items: [
       {
-        title: "UI Elements",
-        icon: Icons.FourCircle,
-        items: [
-          {
-            title: "Alerts",
-            url: "/ui-elements/alerts",
-          },
-          {
-            title: "Buttons",
-            url: "/ui-elements/buttons",
-          },
-        ],
+        title: "Audience",
+        url: "/audience",
+        icon: Icons.Audience,
+        items: [],
+      },
+    ],
+  },
+  {
+    label: "EXPERIENCE",
+    items: [
+      {
+        title: "Experience",
+        url: "/experience",
+        icon: Icons.Experience,
+        items: [],
+      },
+    ],
+  },
+  {
+    label: "ENGAGEMENT",
+    items: [
+      {
+        title: "Engagement",
+        url: "/engagement",
+        icon: Icons.Engagement,
+        items: [],
+      },
+    ],
+  },
+  {
+    label: "ACCESS",
+    items: [
+      {
+        title: "RBAC",
+        url: "/rbac",
+        icon: Icons.ShieldCheck,
+        items: [],
       },
       {
         title: "Authentication",
@@ -97,6 +72,53 @@ export const NAV_DATA = [
           {
             title: "Sign In",
             url: "/auth/sign-in",
+          },
+          {
+            title: "Sign Up",
+            url: "/auth/sign-up",
+          },
+          {
+            title: "Forgot Password",
+            url: "/auth/forgot-password",
+          },
+          {
+            title: "Reset Password",
+            url: "/auth/reset-password",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "SYSTEM",
+    items: [
+      {
+        title: "System",
+        url: "/system",
+        icon: Icons.System,
+        items: [],
+      },
+      {
+        title: "Template vault",
+        url: "/system/template-vault",
+        icon: Icons.FourCircle,
+        items: [],
+      },
+      {
+        title: "Legal",
+        icon: Icons.Legal,
+        items: [
+          {
+            title: "Terms of use",
+            url: "/terms-of-use",
+          },
+          {
+            title: "Privacy policy",
+            url: "/privacy-policy",
+          },
+          {
+            title: "Refund policy",
+            url: "/payment-refund-policy",
           },
         ],
       },

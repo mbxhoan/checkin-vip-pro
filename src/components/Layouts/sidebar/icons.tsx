@@ -168,6 +168,171 @@ export function Authentication(props: PropsType) {
   );
 }
 
+export function ShieldCheck(props: PropsType) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 1.75c.2 0 .396.053.566.154l7.5 4.5c.223.134.384.355.447.612.216.884.337 1.878.337 2.984 0 5.077-2.54 9.145-7.55 12.18a1.25 1.25 0 01-1.284 0C6.506 19.145 3.967 15.077 3.967 10c0-1.106.12-2.1.338-2.984a1.25 1.25 0 01.446-.612l7.5-4.5A1.25 1.25 0 0112 1.75zm0 2.04L5.845 7.49c-.138.68-.21 1.4-.21 2.165 0 4.24 2.04 7.606 6.365 10.266 4.324-2.66 6.365-6.027 6.365-10.266 0-.765-.073-1.485-.21-2.165L12 3.79z"
+        fill="currentColor"
+      />
+      <path
+        d="M15.53 9.47a.75.75 0 00-1.06-1.06L10.5 12.38l-1.47-1.47a.75.75 0 10-1.06 1.06l2 2a.75.75 0 001.06 0l4.5-4.5z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+export function Workspace(props: PropsType) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M4.75 5.25a2 2 0 00-2 2v9.5a2 2 0 002 2h14.5a2 2 0 002-2v-9.5a2 2 0 00-2-2H4.75zm.5 2.5v8.5h13.5v-8.5H5.25z"
+        fill="currentColor"
+      />
+      <path
+        d="M8 8.75a.75.75 0 01.75-.75h6.5a.75.75 0 010 1.5h-6.5A.75.75 0 018 8.75zM8 11.75a.75.75 0 01.75-.75h3a.75.75 0 010 1.5h-3a.75.75 0 01-.75-.75z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+export function Audience(props: PropsType) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      {...props}
+    >
+      <path
+        d="M12 12.25a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5zM5.75 18.25c0-2.277 2.797-4.25 6.25-4.25s6.25 1.973 6.25 4.25v.25a.75.75 0 01-1.5 0v-.25c0-1.408-2.112-2.75-4.75-2.75s-4.75 1.342-4.75 2.75v.25a.75.75 0 01-1.5 0v-.25z"
+        fill="currentColor"
+      />
+      <path
+        d="M17.75 11.25a.75.75 0 01.75.75c0 .78-.25 1.5-.67 2.08a.75.75 0 01-1.2-.9c.27-.38.42-.81.42-1.18a.75.75 0 01.7-.75z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+export function Experience(props: PropsType) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M4.75 4.25A2.75 2.75 0 002 7v10a2.75 2.75 0 002.75 2.75h16.5A2.75 2.75 0 0024 17V7a2.75 2.75 0 00-2.75-2.75H4.75zM3.5 7A1.25 1.25 0 014.75 5.75h16.5A1.25 1.25 0 0122.5 7v10a1.25 1.25 0 01-1.25 1.25H4.75A1.25 1.25 0 013.5 17V7z"
+        fill="currentColor"
+      />
+      <path
+        d="M7 9.25a.75.75 0 01.75-.75h8.5a.75.75 0 010 1.5h-8.5A.75.75 0 017 9.25zM7 12.25a.75.75 0 01.75-.75h5a.75.75 0 010 1.5h-5a.75.75 0 01-.75-.75z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+export function Engagement(props: PropsType) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      {...props}
+    >
+      <path
+        d="M6.75 5.25A3.75 3.75 0 003 9v3.08c0 1.99.87 3.87 2.38 5.16l5.54 4.72a1.5 1.5 0 001.94 0l5.54-4.72A6.75 6.75 0 0021 12.08V9a3.75 3.75 0 00-3.75-3.75H6.75z"
+        fill="currentColor"
+        opacity="0.95"
+      />
+      <path
+        d="M9.25 9.75a.75.75 0 01.75-.75h4a.75.75 0 010 1.5h-4a.75.75 0 01-.75-.75zM9.25 12.25a.75.75 0 01.75-.75h2a.75.75 0 010 1.5h-2a.75.75 0 01-.75-.75z"
+        fill="white"
+      />
+    </svg>
+  );
+}
+
+export function System(props: PropsType) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 8.25a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5zM9.75 12a2.25 2.25 0 114.5 0 2.25 2.25 0 01-4.5 0z"
+        fill="currentColor"
+      />
+      <path
+        d="M12 3.25a.75.75 0 01.75.75v1.025c.675.07 1.334.244 1.946.515l.726-.726a.75.75 0 011.06 0l1.414 1.414a.75.75 0 010 1.061l-.726.726c.271.612.446 1.271.515 1.946h1.025a.75.75 0 010 1.5h-1.025a6.71 6.71 0 01-.515 1.946l.726.726a.75.75 0 010 1.06l-1.414 1.415a.75.75 0 01-1.06 0l-.726-.726a6.71 6.71 0 01-1.946.515v1.025a.75.75 0 01-1.5 0v-1.025a6.71 6.71 0 01-1.946-.515l-.726.726a.75.75 0 01-1.06 0l-1.414-1.414a.75.75 0 010-1.061l.726-.726a6.71 6.71 0 01-.515-1.946H3.25a.75.75 0 010-1.5h1.025a6.71 6.71 0 01.515-1.946l-.726-.726a.75.75 0 010-1.06L5.478 6.04a.75.75 0 011.06 0l.726.726a6.71 6.71 0 011.946-.515V5a.75.75 0 01.75-.75z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+export function Legal(props: PropsType) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M7.25 2.75A2.75 2.75 0 004.5 5.5v13A2.75 2.75 0 007.25 21.25h9.5A2.75 2.75 0 0019.5 18.5v-9.19a2.75 2.75 0 00-.806-1.944l-4.56-4.56a2.75 2.75 0 00-1.944-.806h-4.94zM6 5.5a1.25 1.25 0 011.25-1.25h4.44v4.44A1.75 1.75 0 0013.44 10.44h4.44v8.06a1.25 1.25 0 01-1.25 1.25h-9.5A1.25 1.25 0 016 18.5v-13z"
+        fill="currentColor"
+      />
+      <path
+        d="M8.25 12.5a.75.75 0 01.75-.75h6a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM8.25 15.5a.75.75 0 01.75-.75h4a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 export function ArrowLeftIcon(props: PropsType) {
   return (
     <svg

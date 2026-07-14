@@ -20,6 +20,14 @@ Tai lieu nay dung de dam bao app moi khong bi sot thong tin thuong hieu/chu so h
 - [ ] System notifications, toast messages
 - [ ] Chatbot intro/system responses
 
+## 2.1 Current status snapshot
+
+- [x] Header, sidebar, browser title, login shell, onboarding/auth copy are now Giltech-facing in the app shell
+- [x] Footer/legal pages are now Giltech-facing in the foundation shell
+- [x] Workspace, audience, experience, engagement, system shell pages and the template vault are now Giltech-facing
+- [ ] Email templates, PDF/export titles, chatbot prompts still need parity review
+- [ ] Empty states, notification copy, and archived template pages still need a wider sweep across remaining modules
+
 ## 3. Asset checklist
 
 - [ ] Logo files

@@ -21,26 +21,26 @@ Muc tieu khong phai la lam giao dien dep. Muc tieu la `replatform` ma van giu du
 
 Truoc khi code, phai doc theo thu tu nay:
 
-1. `docs/ui-replatform/README.md`
-2. `docs/ui-replatform/legacy-scope.md`
-3. `docs/ui-replatform/target-architecture.md`
-4. `docs/ui-replatform/schema-migration-strategy.md`
-5. `docs/ui-replatform/rbac-design.md`
-6. `docs/ui-replatform/permission-registry.md`
-7. `docs/ui-replatform/route-to-module-map.md`
-8. `docs/ui-replatform/delivery-playbook.md`
-9. `docs/ui-replatform/migration-tracker.md`
-10. `docs/ui-replatform/brand-migration-checklist.md`
+1. `docs/init/README.md`
+2. `docs/init/legacy-scope.md`
+3. `docs/init/target-architecture.md`
+4. `docs/init/schema-migration-strategy.md`
+5. `docs/init/rbac-design.md`
+6. `docs/init/permission-registry.md`
+7. `docs/init/route-to-module-map.md`
+8. `docs/init/delivery-playbook.md`
+9. `docs/init/migration-tracker.md`
+10. `docs/init/brand-migration-checklist.md`
 
 Neu lam theo module, doc them:
 
-- `docs/ui-replatform/_module-spec-template.md`
-- `docs/ui-replatform/_parity-checklist-template.md`
-- `docs/ui-replatform/_vibe-coder-prompts.md`
+- `docs/init/_module-spec-template.md`
+- `docs/init/_parity-checklist-template.md`
+- `docs/init/_vibe-coder-prompts.md`
 
 Neu task lien quan den thuong hieu, legal, domain, mail sender, doc them:
 
-- `docs/ui-replatform/brand-migration-checklist.md`
+- `docs/init/brand-migration-checklist.md`
 
 ## 3. Non-negotiables
 
@@ -61,7 +61,7 @@ Neu task lien quan den thuong hieu, legal, domain, mail sender, doc them:
 
 - Menu visibility khong phai authorization.
 - Moi page, API action, button action phai map vao permission key.
-- Permission phai duoc doc tu `docs/ui-replatform/permission-registry.md`.
+- Permission phai duoc doc tu `docs/init/permission-registry.md`.
 
 ### 3.4 Parity first
 
@@ -107,23 +107,23 @@ Neu task lien quan den thuong hieu, legal, domain, mail sender, doc them:
 
 ### Bat buoc khi mo rong permission
 
-- `docs/ui-replatform/permission-registry.md`
+- `docs/init/permission-registry.md`
 
 ### Bat buoc khi mo rong module/screen/route
 
-- `docs/ui-replatform/migration-tracker.md`
-- `docs/ui-replatform/route-to-module-map.md` neu co route group moi
+- `docs/init/migration-tracker.md`
+- `docs/init/route-to-module-map.md` neu co route group moi
 
 ### Bat buoc khi doi contract/schema
 
-- `docs/ui-replatform/_module-spec-template.md` ban da dien
+- `docs/init/_module-spec-template.md` ban da dien
 - hoac mot file spec/module note tuong duong
 
 ### Bat buoc truoc khi close module
 
-- `docs/ui-replatform/_parity-checklist-template.md` ban copy ra cho module do
-- `docs/ui-replatform/migration-tracker.md`
-- neu module co touch brand/legal/domain/mail: `docs/ui-replatform/brand-migration-checklist.md`
+- `docs/init/_parity-checklist-template.md` ban copy ra cho module do
+- `docs/init/migration-tracker.md`
+- neu module co touch brand/legal/domain/mail: `docs/init/brand-migration-checklist.md`
 
 ## 9. Verification expectations
 

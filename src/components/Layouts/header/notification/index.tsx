@@ -15,28 +15,28 @@ import { BellIcon } from "./icons";
 const notificationList = [
   {
     image: "/images/user/user-15.png",
-    title: "Piter Joined the Team!",
-    subTitle: "Congratulate him",
+    title: "RBAC seed verified",
+    subTitle: "5 demo users are mapped to auth.users",
   },
   {
     image: "/images/user/user-03.png",
-    title: "New message",
-    subTitle: "Devid sent a new message",
+    title: "RLS baseline active",
+    subTitle: "Tenant tables are protected by service-side checks",
   },
   {
     image: "/images/user/user-26.png",
-    title: "New Payment received",
-    subTitle: "Check your earnings",
+    title: "Shell rewrite in place",
+    subTitle: "Root dashboard now points to the Giltech foundation shell",
   },
   {
     image: "/images/user/user-28.png",
-    title: "Jolly completed tasks",
-    subTitle: "Assign new task",
+    title: "Legal pages ready",
+    subTitle: "Terms, privacy, and refund policy are live",
   },
   {
     image: "/images/user/user-27.png",
-    title: "Roman Joined the Team!",
-    subTitle: "Congratulate him",
+    title: "Next phase queued",
+    subTitle: "Client, check-in, report, print, and campaign parity remain",
   },
 ];
 
@@ -50,8 +50,7 @@ export function Notification() {
       isOpen={isOpen}
       setIsOpen={(open) => {
         setIsOpen(open);
-
-        if (setIsDotVisible) setIsDotVisible(false);
+        setIsDotVisible(false);
       }}
     >
       <DropdownTrigger
@@ -79,10 +78,10 @@ export function Notification() {
       >
         <div className="mb-1 flex items-center justify-between px-2 py-1.5">
           <span className="text-lg font-medium text-dark dark:text-white">
-            Notifications
+            Foundation alerts
           </span>
           <span className="rounded-md bg-primary px-[9px] py-0.5 text-xs font-medium text-white">
-            5 new
+            5 items
           </span>
         </div>
 
@@ -117,11 +116,11 @@ export function Notification() {
         </ul>
 
         <Link
-          href="#"
+          href="/rbac"
           onClick={() => setIsOpen(false)}
           className="block rounded-lg border border-primary p-2 text-center text-sm font-medium tracking-wide text-primary outline-none transition-colors hover:bg-blue-light-5 focus:bg-blue-light-5 focus:text-primary focus-visible:border-primary dark:border-dark-3 dark:text-dark-6 dark:hover:border-dark-5 dark:hover:bg-dark-3 dark:hover:text-dark-7 dark:focus-visible:border-dark-5 dark:focus-visible:bg-dark-3 dark:focus-visible:text-dark-7"
         >
-          See all notifications
+          Open RBAC console
         </Link>
       </DropdownContent>
     </Dropdown>

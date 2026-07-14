@@ -1,14 +1,16 @@
 {
-  "name": "free-nextadmin-nextjs",
+  "name": "giltech-solutions-checkin",
   "version": "1.2.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint src next.config.mjs --ext .js,.ts,.tsx"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.10.0",
+    "@supabase/supabase-js": "^2.101.1",
     "apexcharts": "^4.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
