@@ -1,17 +1,32 @@
 import SignUpWithPassword from "@/components/Auth/SignUpWithPassword";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
+import { LocaleSwitcher } from "@/components/i18n/locale-switcher";
+import { getMessages } from "@/lib/i18n/messages";
+import { getLocale } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Sign up",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const messages = getMessages(locale);
 
-export default function SignUp() {
+  return {
+    title: messages.common.signUp,
+  };
+}
+
+export default async function SignUp() {
+  const locale = await getLocale();
+  const messages = getMessages(locale);
+
   return (
-    <>
-      <Breadcrumb pageName="Sign Up" />
+    <div className="space-y-4">
+      <div className="flex justify-end">
+        <LocaleSwitcher />
+      </div>
+
+      <Breadcrumb pageName={messages.common.signUp} />
 
       <div className="rounded-[10px] bg-white shadow-1 dark:bg-gray-dark dark:shadow-card">
         <div className="flex flex-wrap items-center">
@@ -40,16 +55,15 @@ export default function SignUp() {
                 />
               </Link>
               <p className="mb-3 text-xl font-medium text-dark dark:text-white">
-                Create your account
+                {messages.auth.signUpEyebrow}
               </p>
 
               <h1 className="mb-4 text-2xl font-bold text-dark dark:text-white sm:text-heading-3">
-                Welcome to Giltech Solutions Check-in
+                {messages.auth.createAccountPrompt}
               </h1>
 
               <p className="w-full max-w-[375px] font-medium text-dark-4 dark:text-dark-6">
-                Create a workspace account, confirm your email, and get access
-                to the multi-company RBAC console.
+                {messages.auth.signUpInstructions}
               </p>
 
               <div className="mt-31">
@@ -65,6 +79,6 @@ export default function SignUp() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

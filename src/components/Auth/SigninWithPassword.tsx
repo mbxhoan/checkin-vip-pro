@@ -1,6 +1,7 @@
 "use client";
 import { EmailIcon, PasswordIcon } from "@/assets/icons";
 import { getSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { useI18n } from "@/lib/i18n/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -10,6 +11,7 @@ import { Checkbox } from "../FormElements/checkbox";
 export default function SigninWithPassword() {
   const router = useRouter();
   const supabase = getSupabaseBrowserClient();
+  const { messages } = useI18n();
   const [data, setData] = useState({
     email: process.env.NEXT_PUBLIC_DEMO_USER_MAIL || "",
     password: process.env.NEXT_PUBLIC_DEMO_USER_PASS || "",
@@ -51,9 +53,9 @@ export default function SigninWithPassword() {
     <form onSubmit={handleSubmit}>
       <InputGroup
         type="email"
-        label="Email"
+        label={messages.auth.email}
         className="mb-4 [&_input]:py-[15px]"
-        placeholder="Enter your email"
+        placeholder={messages.auth.enterEmail}
         name="email"
         handleChange={handleChange}
         value={data.email}
@@ -62,9 +64,9 @@ export default function SigninWithPassword() {
 
       <InputGroup
         type="password"
-        label="Password"
+        label={messages.auth.password}
         className="mb-5 [&_input]:py-[15px]"
-        placeholder="Enter your password"
+        placeholder={messages.auth.enterPassword}
         name="password"
         handleChange={handleChange}
         value={data.password}
@@ -73,7 +75,7 @@ export default function SigninWithPassword() {
 
       <div className="mb-6 flex items-center justify-between gap-2 py-2 font-medium">
         <Checkbox
-          label="Remember me"
+          label={messages.common.rememberMe}
           name="remember"
           withIcon="check"
           minimal
@@ -90,7 +92,7 @@ export default function SigninWithPassword() {
           href="/auth/forgot-password"
           className="hover:text-primary dark:text-white dark:hover:text-primary"
         >
-          Forgot Password?
+          {messages.common.forgotPassword}
         </Link>
       </div>
 
@@ -100,7 +102,7 @@ export default function SigninWithPassword() {
           disabled={loading}
           className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary p-4 font-medium text-white transition hover:bg-opacity-90"
         >
-          Sign In
+          {messages.common.signIn}
           {loading && (
             <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-solid border-white border-t-transparent dark:border-primary dark:border-t-transparent" />
           )}

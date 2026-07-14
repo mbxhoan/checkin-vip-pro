@@ -13,23 +13,23 @@ export default function Page() {
     <>
       <Breadcrumb pageName="Buttons" />
 
-      <div className="space-y-10">
+      <div className="space-y-6">
         <ShowcaseSection title="Normal Button">
-          <div className="mb-7.5 flex flex-wrap gap-5 xl:gap-20">
+          <div className="mb-4 flex flex-wrap gap-3 xl:gap-8">
             <Button label="Button" variant="primary" />
             <Button label="Button" variant="primary" shape="rounded" />
             <Button label="Button" variant="primary" shape="full" />
             <Button label="Button" variant="outlinePrimary" shape="rounded" />
           </div>
 
-          <div className="mb-7.5 flex flex-wrap gap-5 xl:gap-20">
+          <div className="mb-4 flex flex-wrap gap-3 xl:gap-8">
             <Button label="Button" variant="green" />
             <Button label="Button" variant="green" shape="rounded" />
             <Button label="Button" variant="green" shape="full" />
             <Button label="Button" variant="outlineGreen" shape="rounded" />
           </div>
 
-          <div className="flex flex-wrap gap-5 xl:gap-20">
+          <div className="flex flex-wrap gap-3 xl:gap-8">
             <Button label="Button" variant="dark" />
             <Button label="Button" variant="dark" shape="rounded" />
             <Button label="Button" variant="dark" shape="full" />
@@ -38,7 +38,7 @@ export default function Page() {
         </ShowcaseSection>
 
         <ShowcaseSection title="Button With Icon">
-          <div className="mb-7.5 flex flex-wrap gap-5 xl:gap-7.5">
+          <div className="mb-4 flex flex-wrap gap-3 xl:gap-5">
             <Button
               label="Button With Icon"
               variant="primary"
@@ -65,7 +65,7 @@ export default function Page() {
             />
           </div>
 
-          <div className="mb-7.5 flex flex-wrap gap-5 xl:gap-7.5">
+          <div className="mb-4 flex flex-wrap gap-3 xl:gap-5">
             <Button
               label="Button With Icon"
               variant="primary"
@@ -96,7 +96,7 @@ export default function Page() {
             />
           </div>
 
-          <div className="flex flex-wrap gap-5 xl:gap-7.5">
+          <div className="flex flex-wrap gap-3 xl:gap-5">
             <Button
               label="Button With Icon"
               variant="primary"

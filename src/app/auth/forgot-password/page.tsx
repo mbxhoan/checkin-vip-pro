@@ -1,17 +1,32 @@
 import ForgotPasswordForm from "@/components/Auth/ForgotPasswordForm";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
+import { LocaleSwitcher } from "@/components/i18n/locale-switcher";
+import { getMessages } from "@/lib/i18n/messages";
+import { getLocale } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Forgot password",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const messages = getMessages(locale);
 
-export default function ForgotPasswordPage() {
+  return {
+    title: messages.common.forgotPassword,
+  };
+}
+
+export default async function ForgotPasswordPage() {
+  const locale = await getLocale();
+  const messages = getMessages(locale);
+
   return (
-    <>
-      <Breadcrumb pageName="Forgot Password" />
+    <div className="space-y-4">
+      <div className="flex justify-end">
+        <LocaleSwitcher />
+      </div>
+
+      <Breadcrumb pageName={messages.common.forgotPassword} />
 
       <div className="rounded-[10px] bg-white shadow-1 dark:bg-gray-dark dark:shadow-card">
         <div className="flex flex-wrap items-center">
@@ -40,16 +55,15 @@ export default function ForgotPasswordPage() {
                 />
               </Link>
               <p className="mb-3 text-xl font-medium text-dark dark:text-white">
-                Recover access
+                {messages.auth.forgotEyebrow}
               </p>
 
               <h1 className="mb-4 text-2xl font-bold text-dark dark:text-white sm:text-heading-3">
-                Reset your password
+                {messages.auth.forgotTitle}
               </h1>
 
               <p className="w-full max-w-[375px] font-medium text-dark-4 dark:text-dark-6">
-                We will send a password reset link to your email so you can
-                update your credentials securely.
+                {messages.auth.forgotInstructions}
               </p>
 
               <div className="mt-31">
@@ -65,6 +79,6 @@ export default function ForgotPasswordPage() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

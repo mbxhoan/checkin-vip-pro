@@ -12,20 +12,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { LogOutIcon, SettingsIcon, UserIcon } from "./icons";
+import { useI18n } from "@/lib/i18n/client";
 
 export function UserInfo() {
   const [isOpen, setIsOpen] = useState(false);
   const { session, signOut } = useAuthSession();
+  const { messages } = useI18n();
 
   const user = session?.profile;
-  const userName = user?.displayName ?? "Guest";
-  const userEmail = user?.email ?? "Not signed in";
+  const userName = user?.displayName ?? messages.common.hello;
+  const userEmail = user?.email ?? messages.common.notSignedIn;
   const userAvatar = session?.authUser.avatarUrl ?? "/images/user/user-03.png";
 
   return (
     <Dropdown isOpen={isOpen} setIsOpen={setIsOpen}>
       <DropdownTrigger className="rounded align-middle outline-none ring-primary ring-offset-2 focus-visible:ring-1 dark:ring-offset-gray-dark">
-        <span className="sr-only">My Account</span>
+        <span className="sr-only">{messages.common.profile}</span>
 
         <figure className="flex items-center gap-3">
           <Image
@@ -55,7 +57,7 @@ export function UserInfo() {
         className="border border-stroke bg-white shadow-md dark:border-dark-3 dark:bg-gray-dark min-[230px]:min-w-[17.5rem]"
         align="end"
       >
-        <h2 className="sr-only">User information</h2>
+        <h2 className="sr-only">{messages.common.profile}</h2>
 
         <figure className="flex items-center gap-2.5 px-5 py-3.5">
           <Image
@@ -80,7 +82,43 @@ export function UserInfo() {
 
         <div className="p-2 text-base text-[#4B5563] dark:text-dark-6 [&>*]:cursor-pointer">
           {session ? (
-            <>
+            <div className="space-y-1">
+              <Link
+                href={"/workspace/clients"}
+                onClick={() => setIsOpen(false)}
+                className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-[9px] hover:bg-gray-2 hover:text-dark dark:hover:bg-dark-3 dark:hover:text-white"
+              >
+                <UserIcon />
+
+                <span className="mr-auto text-base font-medium">
+                  {messages.nav.items.clientWorkspace}
+                </span>
+              </Link>
+
+              <Link
+                href={"/checkin"}
+                onClick={() => setIsOpen(false)}
+                className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-[9px] hover:bg-gray-2 hover:text-dark dark:hover:bg-dark-3 dark:hover:text-white"
+              >
+                <SettingsIcon />
+
+                <span className="mr-auto text-base font-medium">
+                  {messages.nav.items.checkinRuntime}
+                </span>
+              </Link>
+
+              <Link
+                href={"/reports"}
+                onClick={() => setIsOpen(false)}
+                className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-[9px] hover:bg-gray-2 hover:text-dark dark:hover:bg-dark-3 dark:hover:text-white"
+              >
+                <UserIcon />
+
+                <span className="mr-auto text-base font-medium">
+                  {messages.nav.items.reports}
+                </span>
+              </Link>
+
               <Link
                 href={"/system"}
                 onClick={() => setIsOpen(false)}
@@ -89,7 +127,7 @@ export function UserInfo() {
                 <SettingsIcon />
 
                 <span className="mr-auto text-base font-medium">
-                  Open system shell
+                  {messages.common.backToWorkspace}
                 </span>
               </Link>
 
@@ -101,10 +139,10 @@ export function UserInfo() {
                 <UserIcon />
 
                 <span className="mr-auto text-base font-medium">
-                  Template vault
+                  {messages.common.templateVault}
                 </span>
               </Link>
-            </>
+            </div>
           ) : (
             <Link
               href={"/auth/sign-in"}
@@ -113,7 +151,9 @@ export function UserInfo() {
             >
               <UserIcon />
 
-              <span className="mr-auto text-base font-medium">Sign in</span>
+              <span className="mr-auto text-base font-medium">
+                {messages.common.signIn}
+              </span>
             </Link>
           )}
         </div>
@@ -128,12 +168,14 @@ export function UserInfo() {
                 setIsOpen(false);
                 await signOut();
               }}
-            >
-              <LogOutIcon />
+              >
+                <LogOutIcon />
 
-              <span className="text-base font-medium">Log out</span>
-            </button>
-          ) : null}
+              <span className="text-base font-medium">
+                {messages.common.signOut}
+              </span>
+              </button>
+            ) : null}
         </div>
       </DropdownContent>
     </Dropdown>

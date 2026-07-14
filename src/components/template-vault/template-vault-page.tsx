@@ -1,72 +1,79 @@
-import {
-  ARCHIVED_COMPONENT_FAMILIES,
-  ARCHIVED_DEMO_ROUTE_GROUPS,
-} from "@/lib/shell/template-vault";
 import { SectionCard, ToneBadge } from "@/components/rbac/panels";
+import { getMessages } from "@/lib/i18n/messages";
+import { getLocale } from "@/lib/i18n/server";
+import {
+  getArchivedComponentFamilies,
+  getArchivedDemoRouteGroups,
+} from "@/lib/shell/template-vault";
 import Link from "next/link";
 
-export function TemplateVaultPage() {
+export async function TemplateVaultPage() {
+  const locale = await getLocale();
+  const messages = getMessages(locale);
+  const archivedDemoRouteGroups = getArchivedDemoRouteGroups(locale);
+  const archivedComponentFamilies = getArchivedComponentFamilies(locale);
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <section className="overflow-hidden rounded-[28px] border border-amber-200 bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950 text-white shadow-[0_18px_70px_rgba(15,23,42,0.24)]">
-        <div className="grid gap-8 p-6 md:p-8 xl:grid-cols-[1.4fr_0.9fr] xl:p-10">
-          <div className="space-y-6">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-amber-100">
-                Template vault
+        <div className="grid gap-6 p-5 md:p-6 xl:grid-cols-[1.4fr_0.9fr] xl:p-8">
+          <div className="space-y-4">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="rounded-full border border-white/15 bg-white/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-amber-100">
+                {messages.common.templateVault}
               </span>
-              <ToneBadge tone="amber" className="border border-white/10 bg-white/10 text-white">
-                retained
+              <ToneBadge
+                tone="amber"
+                className="border border-white/10 bg-white/10 text-white"
+              >
+                {messages.templateVault.retained}
               </ToneBadge>
-              <ToneBadge tone="teal" className="border border-white/10 bg-white/10 text-white">
-                hidden from primary nav
+              <ToneBadge
+                tone="teal"
+                className="border border-white/10 bg-white/10 text-white"
+              >
+                {messages.templateVault.hiddenFromNav}
               </ToneBadge>
             </div>
 
-            <div className="max-w-3xl space-y-4">
+            <div className="max-w-3xl space-y-3">
               <p className="text-sm font-medium uppercase tracking-[0.24em] text-amber-200/80">
-                Reuse storage
+                {messages.templateVault.reuseStorage}
               </p>
-              <h1 className="text-3xl font-semibold leading-tight text-white md:text-4xl xl:text-[3.35rem]">
-                Demo routes and template components stay available for reuse
-                instead of being rewritten from scratch.
+              <h1 className="text-3xl font-semibold leading-tight text-white md:text-[2.75rem] xl:text-[3.1rem]">
+                {messages.templateVault.title}
               </h1>
-              <p className="max-w-2xl text-base leading-7 text-slate-300 md:text-lg">
-                The original demo surfaces are intentionally kept in the repo as
-                a vault. They are no longer part of the main navigation, but the
-                page keeps them discoverable so the team can reuse cards,
-                layouts, forms, tables, charts, and UI primitives later.
+              <p className="max-w-2xl text-base leading-6 text-slate-300 md:text-[1.05rem]">
+                {messages.templateVault.summary}
               </p>
             </div>
           </div>
 
-          <div className="rounded-[24px] border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+          <div className="rounded-[24px] border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-amber-100/80">
-              Vault policy
+              {messages.templateVault.vaultPolicy}
             </p>
-            <div className="mt-4 space-y-3 text-sm leading-6 text-slate-200">
-              <p>- Keep template routes out of the primary shell navigation.</p>
-              <p>- Preserve reusable components and page blocks in their current folders.</p>
-              <p>- Reuse existing patterns before writing a new component.</p>
-              <p>- Archive, do not delete, until the replacement module is fully stable.</p>
+            <div className="mt-3 space-y-2.5 text-sm leading-6 text-slate-200">
+              {messages.templateVault.vaultPolicyBullets.map((bullet) => (
+                <p key={bullet}>- {bullet}</p>
+              ))}
             </div>
-            <div className="mt-4 rounded-[18px] border border-emerald-400/20 bg-emerald-400/10 p-4 text-sm text-emerald-50">
-              This keeps the app lean for users while preserving the template
-              library for future reuse.
+            <div className="mt-3 rounded-[18px] border border-emerald-400/20 bg-emerald-400/10 p-3.5 text-sm text-emerald-50">
+              {messages.templateVault.preservationNote}
             </div>
           </div>
         </div>
       </section>
 
       <SectionCard
-        title="Archived demo routes"
-        description="These route groups are no longer exposed in the primary shell, but they remain accessible here for reuse and comparison."
+        title={messages.templateVault.archivedDemoRoutesTitle}
+        description={messages.templateVault.archivedDemoRoutesDescription}
       >
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {ARCHIVED_DEMO_ROUTE_GROUPS.map((group) => (
+        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {archivedDemoRouteGroups.map((group) => (
             <article
               key={group.title}
-              className="rounded-2xl border border-stone-200 bg-stone-50 p-4 dark:border-stone-800 dark:bg-slate-950/60"
+              className="rounded-2xl border border-stone-200 bg-stone-50 p-3.5 dark:border-stone-800 dark:bg-slate-950/60"
             >
               <div className="flex items-center justify-between gap-2">
                 <h3 className="font-semibold text-slate-950 dark:text-white">
@@ -77,12 +84,12 @@ export function TemplateVaultPage() {
               <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
                 {group.description}
               </p>
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-3 flex flex-wrap gap-2">
                 {group.routes.map((route) => (
                   <Link
                     key={route.href}
                     href={route.href}
-                    className="rounded-full border border-stone-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:border-teal-300 hover:text-teal-700 dark:border-stone-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-teal-500 dark:hover:text-teal-300"
+                    className="rounded-full border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700 transition hover:border-teal-300 hover:text-teal-700 dark:border-stone-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-teal-300"
                   >
                     {route.label}
                   </Link>
@@ -94,14 +101,14 @@ export function TemplateVaultPage() {
       </SectionCard>
 
       <SectionCard
-        title="Reusable component families"
-        description="These families are the source material the next module rewrites can lean on instead of rebuilding every pattern."
+        title={messages.templateVault.reusableFamiliesTitle}
+        description={messages.templateVault.reusableFamiliesDescription}
       >
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {ARCHIVED_COMPONENT_FAMILIES.map((family) => (
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+          {archivedComponentFamilies.map((family) => (
             <div
               key={family.title}
-              className="rounded-2xl border border-stone-200 p-4 dark:border-stone-800"
+              className="rounded-2xl border border-stone-200 p-3.5 dark:border-stone-800"
             >
               <div className="flex items-center justify-between gap-2">
                 <h3 className="font-semibold text-slate-950 dark:text-white">
@@ -117,9 +124,8 @@ export function TemplateVaultPage() {
         </div>
       </SectionCard>
 
-      <div className="rounded-2xl border border-teal-200 bg-teal-50 p-4 text-sm leading-6 text-teal-900 dark:border-teal-900/40 dark:bg-teal-950/30 dark:text-teal-100">
-        Nothing is deleted here. The vault is the holding area for the demo
-        library while the product shell rewrites continue.
+      <div className="rounded-2xl border border-teal-200 bg-teal-50 p-3.5 text-sm leading-6 text-teal-900 dark:border-teal-900/40 dark:bg-teal-950/30 dark:text-teal-100">
+        {messages.templateVault.preservedNote}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { EmailIcon, PasswordIcon, UserIcon } from "@/assets/icons";
+import { useI18n } from "@/lib/i18n/client";
 import { getSupabaseBrowserClient } from "@/lib/supabase/browser";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -17,6 +18,7 @@ type SignUpState = {
 export default function SignUpWithPassword() {
   const router = useRouter();
   const supabase = getSupabaseBrowserClient();
+  const { messages } = useI18n();
   const [data, setData] = useState<SignUpState>({
     fullName: "",
     companyName: "",
@@ -42,7 +44,7 @@ export default function SignUpWithPassword() {
     setSuccessMessage(null);
 
     if (data.password !== data.confirmPassword) {
-      setErrorMessage("Passwords do not match.");
+      setErrorMessage(messages.auth.passwordMismatch);
       setLoading(false);
       return;
     }
@@ -73,9 +75,7 @@ export default function SignUpWithPassword() {
       return;
     }
 
-    setSuccessMessage(
-      "Account created. Check your email to confirm the sign-up link before logging in.",
-    );
+    setSuccessMessage(messages.auth.confirmSignUpLink);
     setLoading(false);
   };
 
@@ -83,9 +83,9 @@ export default function SignUpWithPassword() {
     <form onSubmit={handleSubmit} className="space-y-4">
       <InputGroup
         type="text"
-        label="Full name"
+        label={messages.auth.fullName}
         className="[&_input]:py-[15px]"
-        placeholder="Enter your full name"
+        placeholder={messages.auth.fullName}
         name="fullName"
         handleChange={handleChange}
         value={data.fullName}
@@ -94,9 +94,9 @@ export default function SignUpWithPassword() {
 
       <InputGroup
         type="text"
-        label="Company name"
+        label={messages.auth.companyName}
         className="[&_input]:py-[15px]"
-        placeholder="Enter your company name"
+        placeholder={messages.auth.companyName}
         name="companyName"
         handleChange={handleChange}
         value={data.companyName}
@@ -105,9 +105,9 @@ export default function SignUpWithPassword() {
 
       <InputGroup
         type="email"
-        label="Email"
+        label={messages.auth.email}
         className="[&_input]:py-[15px]"
-        placeholder="Enter your email"
+        placeholder={messages.auth.enterEmail}
         name="email"
         handleChange={handleChange}
         value={data.email}
@@ -116,9 +116,9 @@ export default function SignUpWithPassword() {
 
       <InputGroup
         type="password"
-        label="Password"
+        label={messages.auth.password}
         className="[&_input]:py-[15px]"
-        placeholder="Create a password"
+        placeholder={messages.auth.createPassword}
         name="password"
         handleChange={handleChange}
         value={data.password}
@@ -127,9 +127,9 @@ export default function SignUpWithPassword() {
 
       <InputGroup
         type="password"
-        label="Confirm password"
+        label={messages.auth.confirmPassword}
         className="[&_input]:py-[15px]"
-        placeholder="Confirm your password"
+        placeholder={messages.auth.confirmPassword}
         name="confirmPassword"
         handleChange={handleChange}
         value={data.confirmPassword}
@@ -141,7 +141,7 @@ export default function SignUpWithPassword() {
         disabled={loading}
         className="flex w-full items-center justify-center rounded-lg bg-primary p-4 font-medium text-white transition hover:bg-opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
       >
-        Create account
+        {messages.auth.createAccount}
       </button>
 
       {errorMessage ? (

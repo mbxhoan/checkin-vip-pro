@@ -24,7 +24,7 @@ export default function FormElementsPage() {
 
       <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
         <div className="flex flex-col gap-9">
-          <ShowcaseSection title="Input Fields" className="space-y-5.5 !p-6.5">
+          <ShowcaseSection title="Input Fields" className="space-y-4 !p-4.5">
             <InputGroup
               label="Default input"
               placeholder="Default input text"
@@ -46,22 +46,19 @@ export default function FormElementsPage() {
             />
           </ShowcaseSection>
 
-          <ShowcaseSection
-            title="Toggle switch input"
-            className="space-y-5.5 !p-6.5"
-          >
+          <ShowcaseSection title="Toggle switch input" className="space-y-4 !p-4.5">
             <Switch />
             <Switch backgroundSize="sm" />
             <Switch withIcon />
             <Switch background="dark" />
           </ShowcaseSection>
 
-          <ShowcaseSection title="Time and date" className="space-y-5.5 !p-6.5">
+          <ShowcaseSection title="Time and date" className="space-y-4 !p-4.5">
             <DatePickerOne />
             <DatePickerTwo />
           </ShowcaseSection>
 
-          <ShowcaseSection title="File upload" className="space-y-5.5 !p-6.5">
+          <ShowcaseSection title="File upload" className="space-y-4 !p-4.5">
             <InputGroup
               type="file"
               fileStyleVariant="style1"
@@ -79,7 +76,7 @@ export default function FormElementsPage() {
         </div>
 
         <div className="flex flex-col gap-9">
-          <ShowcaseSection title="Textarea Fields" className="space-y-6 !p-6.5">
+          <ShowcaseSection title="Textarea Fields" className="space-y-4 !p-4.5">
             <TextAreaGroup
               label="Default textarea"
               placeholder="Default textarea"
@@ -98,7 +95,7 @@ export default function FormElementsPage() {
             />
           </ShowcaseSection>
 
-          <ShowcaseSection title="Select input" className="space-y-5.5 !p-6.5">
+          <ShowcaseSection title="Select input" className="space-y-4 !p-4.5">
             <Select
               label="Select Country"
               items={[
@@ -112,10 +109,7 @@ export default function FormElementsPage() {
             <MultiSelect id="multiSelect" />
           </ShowcaseSection>
 
-          <ShowcaseSection
-            title="Checkbox and radio"
-            className="space-y-5.5 !p-6.5"
-          >
+          <ShowcaseSection title="Checkbox and radio" className="space-y-4 !p-4.5">
             <Checkbox label="Checkbox Text" />
             <Checkbox label="Checkbox Text" withIcon="check" />
             <Checkbox label="Checkbox Text" withIcon="x" />

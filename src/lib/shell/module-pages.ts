@@ -143,6 +143,7 @@ export function getWorkspaceShellLanding(
       ],
       quickLinks: [
         { href: "/rbac/companies", label: "Company console" },
+        { href: "/workspace/clients", label: "Client workspace" },
         { href: "/rbac/users", label: "User access" },
         { href: "/rbac", label: "RBAC overview" },
         { href: "/system/template-vault", label: "Template vault" },
@@ -154,15 +155,121 @@ export function getWorkspaceShellLanding(
   );
 }
 
+export function getWorkspaceClientsLanding(
+  context: ShellPageContext,
+): ModuleLandingProps {
+  return buildShellPage(
+    {
+      eyebrow: "Workspace",
+      title: "Client workspace, backups, and import/export hooks live in one route",
+      summary:
+        "This lane gives operators a focused home for client CRUD, backup inventory, and job queue hooks while tenancy and event setup stay in the workspace shell.",
+      tone: "teal",
+      statusChips: [
+        { label: "Phase 3 screen", tone: "teal" },
+        { label: "Client CRUD", tone: "blue" },
+        { label: "Queue bridge", tone: "emerald" },
+      ],
+      metrics: [
+        {
+          label: "Companies",
+          value: context.bootstrap.metrics.companyCount,
+          note: "Tenant data already feeds the client workspace",
+          tone: "teal",
+        },
+        {
+          label: "Events",
+          value: context.bootstrap.metrics.activeEventCount,
+          note: "Scoped event rows back the editable client records",
+          tone: "blue",
+        },
+        {
+          label: "Users",
+          value: context.bootstrap.metrics.activeUserCount,
+          note: "Auth mappings and operator identities are live",
+          tone: "emerald",
+        },
+        {
+          label: "Permissions",
+          value: context.bootstrap.metrics.permissionCount,
+          note: "Client actions remain permission aware on the server",
+          tone: "amber",
+        },
+      ],
+      liveCards: [
+        {
+          title: "Client CRUD",
+          description:
+            "The workspace route now provides create and update flows for attendee records.",
+          tone: "blue",
+        },
+        {
+          title: "Backup inventory",
+          description:
+            "Import and export backups remain visible for parity and future bulk operations.",
+          tone: "teal",
+        },
+        {
+          title: "Queue bridge",
+          description:
+            "Client import and export actions now enqueue background jobs instead of relying on template screens.",
+          tone: "emerald",
+        },
+        {
+          title: "Scope guard",
+          description:
+            "Permission and scope checks happen on the server before the route mutates data.",
+          tone: "amber",
+        },
+      ],
+      nextCards: [
+        {
+          title: "Bulk import validation",
+          description:
+            "Add richer file validation and mapping for production client imports.",
+          tone: "blue",
+        },
+        {
+          title: "Export execution",
+          description:
+            "Connect the queued export job to the eventual worker runtime.",
+          tone: "emerald",
+        },
+        {
+          title: "Duplicate handling",
+          description:
+            "Add stronger duplicate and merge guards before cutover.",
+          tone: "amber",
+        },
+        {
+          title: "Device-friendly editing",
+          description:
+            "Keep quick edit paths usable on operator tablets and scan devices.",
+          tone: "violet",
+        },
+      ],
+      quickLinks: [
+        { href: "/workspace", label: "Workspace shell" },
+        { href: "/checkin", label: "Check-in runtime" },
+        { href: "/reports", label: "Reports" },
+        { href: "/system/template-vault", label: "Template vault" },
+      ],
+      footerNote:
+        "Maps to the Clients bounded context. Dedicated client workspace is live; deeper bulk parity still needs worker support.",
+    },
+    context,
+  );
+}
+
 export function getAudienceShellLanding(
   context: ShellPageContext,
 ): ModuleLandingProps {
   return buildShellPage(
     {
       eyebrow: "Audience",
-      title: "Client intake, check-in, and reports define the audience lane",
+      title: "Audience overview and read-model keep the operations lane connected",
       summary:
-        "This lane is where client data, check-in runtime, and report parity will live. The shell keeps the rewrite organized around the real operational flow instead of generic admin widgets.",
+        "This lane keeps the cross-module operational snapshot together. Client workspace, check-in runtime, offline sync, and report parity now live on dedicated routes while this overview stays read-only.",
       tone: "blue",
       statusChips: [
         { label: "Phase 1 shell", tone: "blue" },
@@ -199,19 +306,19 @@ export function getAudienceShellLanding(
         {
           title: "Check-in runtime",
           description:
-            "The data model for scanner access and event-scoped check-in is already in place.",
+            "Scanner access, event-scoped check-in, and offline batches are available on dedicated routes.",
           tone: "emerald",
         },
         {
           title: "Client records",
           description:
-            "Clients, scopes, and supporting operator data are retained in the backend foundation.",
+            "Clients, scopes, and supporting operator data remain available for the audience read-model.",
           tone: "blue",
         },
         {
           title: "Report foundation",
           description:
-            "The report lane already has seeded roles, users, and events for parity work.",
+            "Report coverage and execution history now live on a dedicated reports route.",
           tone: "violet",
         },
         {
@@ -225,19 +332,19 @@ export function getAudienceShellLanding(
         {
           title: "Client import/export",
           description:
-            "Bring the legacy client flows into a focused audience workspace.",
+            "Keep parity around client import/export while the dedicated workspace route matures.",
           tone: "blue",
         },
         {
           title: "Offline sync",
           description:
-            "Close the scan app and sync paths that support field operations.",
+            "Finish the remaining reset and worker execution flows for the offline route.",
           tone: "teal",
         },
         {
           title: "Report parity",
           description:
-            "Validate report totals and operator views against the legacy system.",
+            "Validate report totals and legacy comparisons against the dedicated reports screen.",
           tone: "amber",
         },
         {
@@ -248,13 +355,332 @@ export function getAudienceShellLanding(
         },
       ],
       quickLinks: [
-        { href: "/rbac/users", label: "Operator assignments" },
+        { href: "/workspace/clients", label: "Client workspace" },
+        { href: "/checkin", label: "Check-in runtime" },
+        { href: "/reports", label: "Reports" },
         { href: "/rbac/permissions", label: "Permission registry" },
-        { href: "/rbac", label: "RBAC overview" },
         { href: "/system/template-vault", label: "Template vault" },
       ],
       footerNote:
-        "Maps to the Audience Operations bounded context. Check-in and report parity still need dedicated module screens.",
+        "Maps to the Audience Operations bounded context. The read-model is live; the mutating workflows now sit behind dedicated routes.",
+    },
+    context,
+  );
+}
+
+export function getCheckinRuntimeLanding(
+  context: ShellPageContext,
+): ModuleLandingProps {
+  return buildShellPage(
+    {
+      eyebrow: "Audience",
+      title: "Check-in runtime and offline sync run the operator lane",
+      summary:
+        "This route groups scan actions, device heartbeat, and offline batch reconciliation so the runtime can be rewritten without losing field flow.",
+      tone: "emerald",
+      statusChips: [
+        { label: "Phase 3 screen", tone: "emerald" },
+        { label: "Scan runtime", tone: "blue" },
+        { label: "Offline queue", tone: "amber" },
+      ],
+      metrics: [
+        {
+          label: "Events",
+          value: context.bootstrap.metrics.activeEventCount,
+          note: "Scoped event rows drive the operator runtime",
+          tone: "emerald",
+        },
+        {
+          label: "Users",
+          value: context.bootstrap.metrics.userCount,
+          note: "Operators and scanner identities are already mapped",
+          tone: "blue",
+        },
+        {
+          label: "Scopes",
+          value: context.bootstrap.metrics.accessScopeCount,
+          note: "Company and event grants keep scan actions scoped",
+          tone: "violet",
+        },
+        {
+          label: "Permissions",
+          value: context.bootstrap.metrics.permissionCount,
+          note: "Check-in actions remain permission aware",
+          tone: "amber",
+        },
+      ],
+      liveCards: [
+        {
+          title: "Check-in action",
+          description:
+            "The runtime screen now creates live check-in rows from registration codes and client records.",
+          tone: "emerald",
+        },
+        {
+          title: "Device heartbeat",
+          description:
+            "Scanner devices and their sync timestamps are surfaced alongside the runtime queue.",
+          tone: "blue",
+        },
+        {
+          title: "Offline batches",
+          description:
+            "Offline batch rows are visible so operators can reconcile queued scans.",
+          tone: "amber",
+        },
+        {
+          title: "Scope guard",
+          description:
+            "Server-side permission checks prevent the scan route from bypassing RBAC.",
+          tone: "violet",
+        },
+      ],
+      nextCards: [
+        {
+          title: "Offline reset",
+          description:
+            "Finish the remaining reset and replay flows for field operators.",
+          tone: "blue",
+        },
+        {
+          title: "Worker execution",
+          description:
+            "Hook scan reconciliation to a real background worker instead of a placeholder job row.",
+          tone: "emerald",
+        },
+        {
+          title: "Device assignment",
+          description:
+            "Add clearer assignment and revoke flows for scanner devices.",
+          tone: "amber",
+        },
+        {
+          title: "Parity backfill",
+          description:
+            "Compare the runtime output against the legacy scan flow before pilot cutover.",
+          tone: "violet",
+        },
+      ],
+      quickLinks: [
+        { href: "/checkin", label: "Check-in runtime" },
+        { href: "/sync-offline", label: "Offline sync" },
+        { href: "/workspace/clients", label: "Client workspace" },
+        { href: "/reports", label: "Reports" },
+      ],
+      footerNote:
+        "Maps to the Check-in bounded context. Scan and sync routes are live; worker execution and reset parity still need productization.",
+    },
+    context,
+  );
+}
+
+export function getOfflineSyncLanding(
+  context: ShellPageContext,
+): ModuleLandingProps {
+  return buildShellPage(
+    {
+      eyebrow: "Audience",
+      title: "Offline sync and batch reconciliation stay separate from the scan surface",
+      summary:
+        "This route keeps the sync queue visible without mixing it into the live scan path. Operators can reconcile batches and device heartbeats from one dedicated place.",
+      tone: "amber",
+      statusChips: [
+        { label: "Phase 3 screen", tone: "amber" },
+        { label: "Sync queue", tone: "emerald" },
+        { label: "Device heartbeat", tone: "blue" },
+      ],
+      metrics: [
+        {
+          label: "Events",
+          value: context.bootstrap.metrics.activeEventCount,
+          note: "Offline batches remain event scoped",
+          tone: "amber",
+        },
+        {
+          label: "Operators",
+          value: context.bootstrap.metrics.activeUserCount,
+          note: "Operator identities stay attached to sync state",
+          tone: "blue",
+        },
+        {
+          label: "Scopes",
+          value: context.bootstrap.metrics.accessScopeCount,
+          note: "Offline reconciliation respects company and event scope",
+          tone: "emerald",
+        },
+        {
+          label: "Permissions",
+          value: context.bootstrap.metrics.permissionCount,
+          note: "Sync actions reuse the check-in permission model",
+          tone: "violet",
+        },
+      ],
+      liveCards: [
+        {
+          title: "Queued batches",
+          description:
+            "The route surfaces offline batch rows and their sync status for operator review.",
+          tone: "amber",
+        },
+        {
+          title: "Device sync",
+          description:
+            "Scanner device heartbeat and last sync timestamps are grouped with the queue.",
+          tone: "blue",
+        },
+        {
+          title: "Background jobs",
+          description:
+            "The sync surface exposes the job bridge that will later be handed to worker execution.",
+          tone: "emerald",
+        },
+        {
+          title: "Scope guard",
+          description:
+            "Only principals with the right check-in permissions can reconcile batches.",
+          tone: "violet",
+        },
+      ],
+      nextCards: [
+        {
+          title: "Reset and replay",
+          description:
+            "Add explicit reset and replay controls for failed offline batches.",
+          tone: "amber",
+        },
+        {
+          title: "Worker execution",
+          description:
+            "Move the sync queue from a seeded row to a durable worker workflow.",
+          tone: "emerald",
+        },
+        {
+          title: "Failure recovery",
+          description:
+            "Surface failed batch recovery with clearer retry and error detail.",
+          tone: "blue",
+        },
+        {
+          title: "Audit trail",
+          description:
+            "Keep sync history visible for operators and support staff.",
+          tone: "violet",
+        },
+      ],
+      quickLinks: [
+        { href: "/checkin", label: "Check-in runtime" },
+        { href: "/workspace/clients", label: "Client workspace" },
+        { href: "/reports", label: "Reports" },
+        { href: "/system/template-vault", label: "Template vault" },
+      ],
+      footerNote:
+        "Maps to the offline reconciliation slice of the Check-in bounded context. The sync route is live; reset and worker execution still need finish work.",
+    },
+    context,
+  );
+}
+
+export function getReportsShellLanding(
+  context: ShellPageContext,
+): ModuleLandingProps {
+  return buildShellPage(
+    {
+      eyebrow: "Reports",
+      title: "Report parity, coverage, and execution history sit in a dedicated lane",
+      summary:
+        "This route exposes the report catalog and run history needed to compare the replatform with the legacy system before UX/UI rewrite.",
+      tone: "violet",
+      statusChips: [
+        { label: "Phase 3 screen", tone: "violet" },
+        { label: "Parity lane", tone: "amber" },
+        { label: "Coverage ready", tone: "emerald" },
+      ],
+      metrics: [
+        {
+          label: "Companies",
+          value: context.bootstrap.metrics.companyCount,
+          note: "Report scopes stay tenant aware",
+          tone: "violet",
+        },
+        {
+          label: "Events",
+          value: context.bootstrap.metrics.activeEventCount,
+          note: "Event scope is already wired into report data",
+          tone: "blue",
+        },
+        {
+          label: "Users",
+          value: context.bootstrap.metrics.userCount,
+          note: "Requested-by metadata stays attached to run history",
+          tone: "emerald",
+        },
+        {
+          label: "Permissions",
+          value: context.bootstrap.metrics.permissionCount,
+          note: "Report actions stay behind the registry",
+          tone: "amber",
+        },
+      ],
+      liveCards: [
+        {
+          title: "Report catalog",
+          description:
+            "The dedicated reports route now shows the live report catalog and current scope.",
+          tone: "violet",
+        },
+        {
+          title: "Run history",
+          description:
+            "Latest report runs are visible so parity can be checked before release.",
+          tone: "emerald",
+        },
+        {
+          title: "Coverage snapshot",
+          description:
+            "Coverage state highlights which active reports have a successful run.",
+          tone: "amber",
+        },
+        {
+          title: "Parity notes",
+          description:
+            "The screen keeps legacy-vs-new comparison work front and center.",
+          tone: "blue",
+        },
+      ],
+      nextCards: [
+        {
+          title: "Drill-down export",
+          description:
+            "Add report drill-down and export flows on top of the snapshot.",
+          tone: "emerald",
+        },
+        {
+          title: "Legacy compare",
+          description:
+            "Compare the current totals against the legacy system before pilot cutover.",
+          tone: "amber",
+        },
+        {
+          title: "Parameterized runs",
+          description:
+            "Expose filters and parameters as the reports UI grows.",
+          tone: "blue",
+        },
+        {
+          title: "Refresh cadence",
+          description:
+            "Document the runtime refresh pattern for operators and analysts.",
+          tone: "violet",
+        },
+      ],
+      quickLinks: [
+        { href: "/audience", label: "Audience overview" },
+        { href: "/checkin", label: "Check-in runtime" },
+        { href: "/workspace/clients", label: "Client workspace" },
+        { href: "/system/template-vault", label: "Template vault" },
+      ],
+      footerNote:
+        "Maps to the Reports bounded context. Dedicated parity screen is live; drill-down and export workflows still need legacy comparison.",
     },
     context,
   );

@@ -31,7 +31,7 @@ export default function Page() {
     getRbacBootstrapContext();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <Breadcrumb pageName="RBAC Overview" />
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -61,7 +61,7 @@ export default function Page() {
         />
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
+      <div className="grid gap-4 xl:grid-cols-[1.15fr_0.85fr]">
         <SectionCard
           title="Bootstrap session"
           description="This snapshot is produced server-side from createRbacPayload() so every page can consume the same permission contract."
@@ -69,8 +69,8 @@ export default function Page() {
             <ToneBadge tone="emerald">System scope</ToneBadge>
           }
         >
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded-[16px] border border-stroke p-4 dark:border-dark-3">
+          <div className="grid gap-3 md:grid-cols-2">
+            <div className="rounded-[16px] border border-stroke p-3.5 dark:border-dark-3">
               <p className="text-sm text-dark-4 dark:text-dark-6">Principal</p>
               <p className="mt-2 text-lg font-semibold text-dark dark:text-white">
                 {principal.displayName}
@@ -87,7 +87,7 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="rounded-[16px] border border-stroke p-4 dark:border-dark-3">
+            <div className="rounded-[16px] border border-stroke p-3.5 dark:border-dark-3">
               <p className="text-sm text-dark-4 dark:text-dark-6">Effective access</p>
               <p className="mt-2 text-lg font-semibold text-dark dark:text-white">
                 {payload.accessibleCompanyIds === null
@@ -110,7 +110,7 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="mt-5 overflow-hidden rounded-[16px] border border-stroke dark:border-dark-3">
+          <div className="mt-4 overflow-hidden rounded-[16px] border border-stroke dark:border-dark-3">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -140,7 +140,7 @@ export default function Page() {
           title="Quick links"
           description="The RBAC admin console is organized around the data model, not only menu visibility."
         >
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-2.5 sm:grid-cols-2">
             {[
               { label: "Companies", href: "/rbac/companies", note: "Multi-company scope and access" },
               { label: "Users", href: "/rbac/users", note: "Role assignment and memberships" },
@@ -150,7 +150,7 @@ export default function Page() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-[16px] border border-stroke p-4 transition hover:border-primary hover:shadow-1 dark:border-dark-3 dark:hover:border-primary"
+                className="rounded-[16px] border border-stroke p-3.5 transition hover:border-primary hover:shadow-1 dark:border-dark-3 dark:hover:border-primary"
               >
                 <p className="font-semibold text-dark dark:text-white">
                   {item.label}

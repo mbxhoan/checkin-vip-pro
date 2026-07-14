@@ -4,7 +4,7 @@ import { GoogleIcon } from "@/assets/icons";
 import { getSupabaseBrowserClient } from "@/lib/supabase/browser";
 import { useState } from "react";
 
-export default function GoogleSigninButton({ text }: { text: string }) {
+export default function GoogleSigninButton({ label }: { label: string }) {
   const supabase = getSupabaseBrowserClient();
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -36,7 +36,7 @@ export default function GoogleSigninButton({ text }: { text: string }) {
         className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray-2 p-[15px] font-medium hover:bg-opacity-50 disabled:cursor-not-allowed disabled:opacity-70 dark:border-dark-3 dark:bg-dark-2 dark:hover:bg-opacity-50"
       >
         <GoogleIcon />
-        {text} with Google
+        {label}
       </button>
 
       {errorMessage ? (

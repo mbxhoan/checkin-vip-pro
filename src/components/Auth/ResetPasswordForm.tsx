@@ -1,6 +1,7 @@
 "use client";
 
 import { PasswordIcon } from "@/assets/icons";
+import { useI18n } from "@/lib/i18n/client";
 import { getSupabaseBrowserClient } from "@/lib/supabase/browser";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -9,6 +10,7 @@ import InputGroup from "../FormElements/InputGroup";
 export default function ResetPasswordForm() {
   const router = useRouter();
   const supabase = getSupabaseBrowserClient();
+  const { messages } = useI18n();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(true);
@@ -52,7 +54,7 @@ export default function ResetPasswordForm() {
     setSuccessMessage(null);
 
     if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match.");
+      setErrorMessage(messages.auth.passwordMismatch);
       setSubmitting(false);
       return;
     }
@@ -67,7 +69,7 @@ export default function ResetPasswordForm() {
       return;
     }
 
-    setSuccessMessage("Password updated. Redirecting to sign in.");
+    setSuccessMessage(messages.auth.passwordUpdated);
     router.refresh();
     router.push("/auth/sign-in?reset=1");
   };
@@ -75,7 +77,7 @@ export default function ResetPasswordForm() {
   if (loading) {
     return (
       <div className="rounded-lg border border-stroke bg-gray-2 p-4 text-sm text-dark-5 dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6">
-        Preparing your recovery session...
+        {messages.auth.preparingRecovery}
       </div>
     );
   }
@@ -84,9 +86,9 @@ export default function ResetPasswordForm() {
     <form onSubmit={handleSubmit} className="space-y-4">
       <InputGroup
         type="password"
-        label="New password"
+        label={messages.auth.newPassword}
         className="[&_input]:py-[15px]"
-        placeholder="Enter a new password"
+        placeholder={messages.auth.createPassword}
         name="password"
         handleChange={(event) => setPassword(event.target.value)}
         value={password}
@@ -95,9 +97,9 @@ export default function ResetPasswordForm() {
 
       <InputGroup
         type="password"
-        label="Confirm new password"
+        label={messages.auth.confirmNewPassword}
         className="[&_input]:py-[15px]"
-        placeholder="Confirm the new password"
+        placeholder={messages.auth.confirmPassword}
         name="confirmPassword"
         handleChange={(event) => setConfirmPassword(event.target.value)}
         value={confirmPassword}
@@ -109,7 +111,7 @@ export default function ResetPasswordForm() {
         disabled={!recoveryReady || submitting}
         className="flex w-full items-center justify-center rounded-lg bg-primary p-4 font-medium text-white transition hover:bg-opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
       >
-        Update password
+        {messages.auth.updatePassword}
       </button>
 
       {errorMessage ? (

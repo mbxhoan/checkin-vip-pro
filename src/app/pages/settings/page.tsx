@@ -12,7 +12,7 @@ export default function SettingsPage() {
     <div className="mx-auto w-full max-w-[1080px]">
       <Breadcrumb pageName="Settings" />
 
-      <div className="grid grid-cols-5 gap-8">
+      <div className="grid grid-cols-5 gap-4">
         <div className="col-span-5 xl:col-span-3">
           <PersonalInfoForm />
         </div>
@@ -23,4 +23,3 @@ export default function SettingsPage() {
     </div>
   );
 };
-

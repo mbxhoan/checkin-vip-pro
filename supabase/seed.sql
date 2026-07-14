@@ -31,7 +31,16 @@ declare
     v_demo_client_one_id bigint := 901;
     v_demo_client_two_id bigint := 902;
     v_demo_scanner_device_id bigint := 951;
+    v_demo_client_backup_import_id bigint := 1401;
+    v_demo_client_backup_export_id bigint := 1402;
+    v_demo_offline_batch_queued_id bigint := 1501;
+    v_demo_offline_batch_synced_id bigint := 1502;
     v_demo_checkin_id bigint := 1001;
+    v_demo_report_run_success_id bigint := 1601;
+    v_demo_report_run_failed_id bigint := 1602;
+    v_demo_import_job_id bigint := 1701;
+    v_demo_export_job_id bigint := 1702;
+    v_demo_print_job_id bigint := 1703;
 begin
     insert into public.subscription_plans (
         id,
@@ -946,6 +955,104 @@ begin
         internal_notes = excluded.internal_notes,
         metadata = excluded.metadata;
 
+    insert into public.client_backups (
+        id,
+        event_id,
+        source_media_id,
+        created_by_user_id,
+        backup_name,
+        backup_kind,
+        row_count,
+        snapshot_payload,
+        metadata
+    )
+    values
+    (
+        v_demo_client_backup_import_id,
+        v_demo_event_id,
+        null,
+        v_demo_admin_user_id,
+        'Northwind Summit 2026 import snapshot',
+        'import',
+        2,
+        '[
+            {"registration_code": "NW-0001", "status": "registered"},
+            {"registration_code": "NW-0002", "status": "pending"}
+        ]'::jsonb,
+        '{"seed": true, "source": "import"}'::jsonb
+    ),
+    (
+        v_demo_client_backup_export_id,
+        v_demo_event_id,
+        null,
+        v_demo_manager_user_id,
+        'Northwind Summit 2026 export snapshot',
+        'export',
+        2,
+        '[
+            {"registration_code": "NW-0001", "status": "checked_in"},
+            {"registration_code": "NW-0002", "status": "pending"}
+        ]'::jsonb,
+        '{"seed": true, "source": "export"}'::jsonb
+    )
+    on conflict (id) do update set
+        event_id = excluded.event_id,
+        source_media_id = excluded.source_media_id,
+        created_by_user_id = excluded.created_by_user_id,
+        backup_name = excluded.backup_name,
+        backup_kind = excluded.backup_kind,
+        row_count = excluded.row_count,
+        snapshot_payload = excluded.snapshot_payload,
+        metadata = excluded.metadata;
+
+    insert into public.scan_offline_batches (
+        id,
+        scanner_device_id,
+        event_id,
+        user_id,
+        status,
+        row_count,
+        payload,
+        synced_at,
+        error_message,
+        metadata
+    )
+    values
+    (
+        v_demo_offline_batch_queued_id,
+        v_demo_scanner_device_id,
+        v_demo_event_id,
+        v_demo_scanner_user_id,
+        'queued',
+        1,
+        '[{"client_id": 902, "registration_code": "NW-0002", "method": "offline_sync"}]'::jsonb,
+        null,
+        null,
+        '{"seed": true, "source": "offline_sync"}'::jsonb
+    ),
+    (
+        v_demo_offline_batch_synced_id,
+        v_demo_scanner_device_id,
+        v_demo_event_id,
+        v_demo_scanner_user_id,
+        'completed',
+        1,
+        '[{"client_id": 901, "registration_code": "NW-0001", "method": "offline_sync"}]'::jsonb,
+        timestamptz '2026-04-20 09:37:00+07',
+        null,
+        '{"seed": true, "source": "offline_sync"}'::jsonb
+    )
+    on conflict (id) do update set
+        scanner_device_id = excluded.scanner_device_id,
+        event_id = excluded.event_id,
+        user_id = excluded.user_id,
+        status = excluded.status,
+        row_count = excluded.row_count,
+        payload = excluded.payload,
+        synced_at = excluded.synced_at,
+        error_message = excluded.error_message,
+        metadata = excluded.metadata;
+
     insert into public.scanner_devices (
         id,
         event_id,
@@ -987,6 +1094,7 @@ begin
         client_id,
         scanner_device_id,
         checked_by_user_id,
+        source_batch_id,
         event_area_id,
         status,
         method,
@@ -1001,6 +1109,7 @@ begin
         v_demo_client_one_id,
         v_demo_scanner_device_id,
         v_demo_scanner_user_id,
+        v_demo_offline_batch_synced_id,
         v_main_hall_area_id,
         'checked_in',
         'qr',
@@ -1014,12 +1123,159 @@ begin
         client_id = excluded.client_id,
         scanner_device_id = excluded.scanner_device_id,
         checked_by_user_id = excluded.checked_by_user_id,
+        source_batch_id = excluded.source_batch_id,
         event_area_id = excluded.event_area_id,
         status = excluded.status,
         method = excluded.method,
         happened_at = excluded.happened_at,
         note = excluded.note,
         payload = excluded.payload,
+        metadata = excluded.metadata;
+
+    update public.checkins
+    set source_batch_id = v_demo_offline_batch_synced_id
+    where id = v_demo_checkin_id;
+
+    insert into public.report_runs (
+        id,
+        report_id,
+        requested_by_user_id,
+        status,
+        parameters,
+        result_snapshot,
+        row_count,
+        started_at,
+        finished_at,
+        error_message,
+        metadata
+    )
+    values
+    (
+        v_demo_report_run_success_id,
+        v_demo_report_id,
+        v_demo_analyst_user_id,
+        'success',
+        '{"range": "day", "status": ["registered", "checked_in"]}'::jsonb,
+        '{"checked_in": 1, "pending": 1}'::jsonb,
+        2,
+        timestamptz '2026-04-20 09:40:00+07',
+        timestamptz '2026-04-20 09:41:00+07',
+        null,
+        '{"seed": true, "source": "parity"}'::jsonb
+    ),
+    (
+        v_demo_report_run_failed_id,
+        v_demo_report_id,
+        v_demo_manager_user_id,
+        'failed',
+        '{"range": "week"}'::jsonb,
+        '{}'::jsonb,
+        null,
+        timestamptz '2026-04-20 09:42:00+07',
+        timestamptz '2026-04-20 09:42:30+07',
+        'Legacy parity comparison still pending'::text,
+        '{"seed": true, "source": "parity"}'::jsonb
+    )
+    on conflict (id) do update set
+        report_id = excluded.report_id,
+        requested_by_user_id = excluded.requested_by_user_id,
+        status = excluded.status,
+        parameters = excluded.parameters,
+        result_snapshot = excluded.result_snapshot,
+        row_count = excluded.row_count,
+        started_at = excluded.started_at,
+        finished_at = excluded.finished_at,
+        error_message = excluded.error_message,
+        metadata = excluded.metadata;
+
+    insert into public.background_jobs (
+        id,
+        company_id,
+        event_id,
+        actor_user_id,
+        kind,
+        status,
+        idempotency_key,
+        payload,
+        result_payload,
+        attempts,
+        max_attempts,
+        scheduled_at,
+        started_at,
+        finished_at,
+        error_message,
+        metadata
+    )
+    values
+    (
+        v_demo_import_job_id,
+        v_demo_company_id,
+        v_demo_event_id,
+        v_demo_admin_user_id,
+        'import_clients',
+        'completed',
+        'seed-import-clients-20260420',
+        '{"event_id": 402, "source": "northwind-import.csv"}'::jsonb,
+        '{"inserted": 2, "updated": 0}'::jsonb,
+        1,
+        3,
+        timestamptz '2026-04-20 09:10:00+07',
+        timestamptz '2026-04-20 09:10:05+07',
+        timestamptz '2026-04-20 09:11:00+07',
+        null,
+        '{"seed": true, "source": "jobs"}'::jsonb
+    ),
+    (
+        v_demo_export_job_id,
+        v_demo_company_id,
+        v_demo_event_id,
+        v_demo_analyst_user_id,
+        'export_reports',
+        'queued',
+        'seed-export-reports-20260420',
+        '{"report_id": 601, "format": "csv"}'::jsonb,
+        '{}'::jsonb,
+        0,
+        3,
+        timestamptz '2026-04-20 09:30:00+07',
+        null,
+        null,
+        null,
+        '{"seed": true, "source": "jobs"}'::jsonb
+    ),
+    (
+        v_demo_print_job_id,
+        v_demo_company_id,
+        v_demo_event_id,
+        v_demo_scanner_user_id,
+        'print_batch',
+        'running',
+        'seed-print-batch-20260420',
+        '{"label": "front-desk", "count": 25}'::jsonb,
+        '{}'::jsonb,
+        1,
+        3,
+        timestamptz '2026-04-20 09:34:00+07',
+        timestamptz '2026-04-20 09:34:10+07',
+        null,
+        null,
+        '{"seed": true, "source": "jobs"}'::jsonb
+    )
+    on conflict (id) do update set
+        company_id = excluded.company_id,
+        event_id = excluded.event_id,
+        actor_user_id = excluded.actor_user_id,
+        kind = excluded.kind,
+        status = excluded.status,
+        idempotency_key = excluded.idempotency_key,
+        payload = excluded.payload,
+        result_payload = excluded.result_payload,
+        attempts = excluded.attempts,
+        max_attempts = excluded.max_attempts,
+        scheduled_at = excluded.scheduled_at,
+        started_at = excluded.started_at,
+        finished_at = excluded.finished_at,
+        error_message = excluded.error_message,
         metadata = excluded.metadata;
 
     insert into public.legal_documents (

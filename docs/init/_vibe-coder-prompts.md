@@ -223,14 +223,14 @@ Update the migration tracker when done.
 Danh dau theo repo `checkin-vip-pro` hien tai:
 
 - Prompt 1: `done`
-- Prompt 2: `partial`
+- Prompt 2: `partial` (client workspace, check-in runtime, offline sync, and report parity routes landed; worker and legacy compare gaps still open)
 - Prompt 3: `done`
 - Prompt 4: `done`
-- Prompt 5: `partial`
+- Prompt 5: `partial` (audience parity checklist plus module-specific parity checklists added; legacy comparison and mutation gaps still open)
 - Prompt 6: `done`
 - Prompt 7: `not started` theo nghia khong dung
 - Prompt 8: `done`
 
 Ghi chu:
 - `partial` nghia la da co implementation co ban va tracker/parity note, nhung chua dong flow hoan chinh.
-- Hien tai `auth bootstrap`, `mutation screens`, `RLS expansion`, va `foundation shell` da duoc dong goi xong, nhung parity module layer van con mo o prompt 2 va 5.
+- Hien tai `auth bootstrap`, `mutation screens`, `RLS expansion`, `foundation shell`, va cac route workspace/check-in/reports da co, nhung parity module layer van con mo o worker execution, legacy compare, va export/replay.

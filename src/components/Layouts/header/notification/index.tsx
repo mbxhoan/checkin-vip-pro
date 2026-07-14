@@ -11,39 +11,41 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { BellIcon } from "./icons";
-
-const notificationList = [
-  {
-    image: "/images/user/user-15.png",
-    title: "RBAC seed verified",
-    subTitle: "5 demo users are mapped to auth.users",
-  },
-  {
-    image: "/images/user/user-03.png",
-    title: "RLS baseline active",
-    subTitle: "Tenant tables are protected by service-side checks",
-  },
-  {
-    image: "/images/user/user-26.png",
-    title: "Shell rewrite in place",
-    subTitle: "Root dashboard now points to the Giltech foundation shell",
-  },
-  {
-    image: "/images/user/user-28.png",
-    title: "Legal pages ready",
-    subTitle: "Terms, privacy, and refund policy are live",
-  },
-  {
-    image: "/images/user/user-27.png",
-    title: "Next phase queued",
-    subTitle: "Client, check-in, report, print, and campaign parity remain",
-  },
-];
+import { useI18n } from "@/lib/i18n/client";
 
 export function Notification() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDotVisible, setIsDotVisible] = useState(true);
   const isMobile = useIsMobile();
+  const { messages } = useI18n();
+
+  const notificationList = [
+    {
+      image: "/images/user/user-15.png",
+      title: messages.notifications.rbacSeedVerified,
+      subTitle: messages.notifications.rbacSeedVerifiedDetail,
+    },
+    {
+      image: "/images/user/user-03.png",
+      title: messages.notifications.rlsBaselineActive,
+      subTitle: messages.notifications.rlsBaselineActiveDetail,
+    },
+    {
+      image: "/images/user/user-26.png",
+      title: messages.notifications.shellRewriteInPlace,
+      subTitle: messages.notifications.shellRewriteInPlaceDetail,
+    },
+    {
+      image: "/images/user/user-28.png",
+      title: messages.notifications.legalPagesReady,
+      subTitle: messages.notifications.legalPagesReadyDetail,
+    },
+    {
+      image: "/images/user/user-27.png",
+      title: messages.notifications.nextPhaseQueued,
+      subTitle: messages.notifications.nextPhaseQueuedDetail,
+    },
+  ];
 
   return (
     <Dropdown
@@ -55,7 +57,7 @@ export function Notification() {
     >
       <DropdownTrigger
         className="grid size-12 place-items-center rounded-full border bg-gray-2 text-dark outline-none hover:text-primary focus-visible:border-primary focus-visible:text-primary dark:border-dark-4 dark:bg-dark-3 dark:text-white dark:focus-visible:border-primary"
-        aria-label="View Notifications"
+        aria-label={messages.common.notifications}
       >
         <span className="relative">
           <BellIcon />
@@ -78,10 +80,10 @@ export function Notification() {
       >
         <div className="mb-1 flex items-center justify-between px-2 py-1.5">
           <span className="text-lg font-medium text-dark dark:text-white">
-            Foundation alerts
+            {messages.notifications.title}
           </span>
           <span className="rounded-md bg-primary px-[9px] py-0.5 text-xs font-medium text-white">
-            5 items
+            {messages.notifications.itemsLabel}
           </span>
         </div>
 
@@ -120,7 +122,7 @@ export function Notification() {
           onClick={() => setIsOpen(false)}
           className="block rounded-lg border border-primary p-2 text-center text-sm font-medium tracking-wide text-primary outline-none transition-colors hover:bg-blue-light-5 focus:bg-blue-light-5 focus:text-primary focus-visible:border-primary dark:border-dark-3 dark:text-dark-6 dark:hover:border-dark-5 dark:hover:bg-dark-3 dark:hover:text-dark-7 dark:focus-visible:border-dark-5 dark:focus-visible:bg-dark-3 dark:focus-visible:text-dark-7"
         >
-          Open RBAC console
+          {messages.notifications.openRbacConsole}
         </Link>
       </DropdownContent>
     </Dropdown>

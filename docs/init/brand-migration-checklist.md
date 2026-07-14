@@ -23,9 +23,11 @@ Tai lieu nay dung de dam bao app moi khong bi sot thong tin thuong hieu/chu so h
 ## 2.1 Current status snapshot
 
 - [x] Header, sidebar, browser title, login shell, onboarding/auth copy are now Giltech-facing in the app shell
+- [x] Mandatory authentication gate and VI/EN locale switch are now part of the foundation shell
 - [x] Footer/legal pages are now Giltech-facing in the foundation shell
 - [x] Workspace, audience, experience, engagement, system shell pages and the template vault are now Giltech-facing
-- [ ] Email templates, PDF/export titles, chatbot prompts still need parity review
+- [x] Client workspace, check-in runtime, offline sync, and reports routes are now Giltech-facing
+- [ ] Shell landing copy, email templates, PDF/export titles, chatbot prompts still need parity review
 - [ ] Empty states, notification copy, and archived template pages still need a wider sweep across remaining modules
 
 ## 3. Asset checklist

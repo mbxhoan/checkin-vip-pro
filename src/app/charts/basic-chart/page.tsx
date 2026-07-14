@@ -22,7 +22,7 @@ export default async function Page(props: PropsType) {
     <>
       <Breadcrumb pageName="Basic Chart" />
 
-      <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7.5">
+      <div className="grid grid-cols-12 gap-3 md:gap-4 2xl:gap-5">
         <UsedDevices
           key={extractTimeFrame("used_devices")}
           timeFrame={extractTimeFrame("used_devices")?.split(":")[1]}

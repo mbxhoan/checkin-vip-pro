@@ -40,7 +40,9 @@ Tai lieu nay map route hien tai sang module va phase migration. Muc tieu la tran
 | `/rbac` and `/rbac/*` | RBAC admin console | 2 |
 | `/` | Foundation dashboard shell | 1 |
 | `/workspace` | Workspace shell | 1 |
+| `/workspace/clients` | Client workspace | 3 |
 | `/audience` | Audience shell | 1 |
+| `/reports` | Reports | 3 |
 | `/experience` | Experience shell | 1 |
 | `/engagement` | Engagement shell | 1 |
 | `/system` | System shell | 1 |
@@ -86,7 +88,7 @@ Tai lieu nay map route hien tai sang module va phase migration. Muc tieu la tran
 | `/index` | Event selection for scan | 3 |
 | `/scan/{event}` | Check-in runtime | 3 |
 | `/scan/{event}/layout` | Check-in layout save | 3 |
-| `/checkin` | Check-in action | 3 |
+| `/checkin` | Check-in runtime | 3 |
 | `/sync-offline` | Offline sync | 3 |
 | `/render-label/{label}` | On-site print render | 6 |
 

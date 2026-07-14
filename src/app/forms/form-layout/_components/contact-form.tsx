@@ -5,9 +5,9 @@ import { ShowcaseSection } from "@/components/Layouts/showcase-section";
 
 export function ContactForm() {
   return (
-    <ShowcaseSection title="Contact Form" className="!p-6.5">
+    <ShowcaseSection title="Contact Form" className="!p-4.5">
       <form action="#">
-        <div className="mb-4.5 flex flex-col gap-4.5 xl:flex-row">
+        <div className="mb-3.5 flex flex-col gap-3.5 xl:flex-row">
           <InputGroup
             label="First name"
             type="text"
@@ -27,7 +27,7 @@ export function ContactForm() {
           label="Email"
           type="email"
           placeholder="Enter your email address"
-          className="mb-4.5"
+          className="mb-3.5"
           required
         />
 
@@ -35,13 +35,13 @@ export function ContactForm() {
           label="Subject"
           type="text"
           placeholder="Enter your subject"
-          className="mb-4.5"
+          className="mb-3.5"
         />
 
         <Select
           label="Subject"
           placeholder="Select your subject"
-          className="mb-4.5"
+          className="mb-3.5"
           items={[
             { label: "United States", value: "USA" },
             { label: "United Kingdom", value: "UK" },
@@ -51,7 +51,7 @@ export function ContactForm() {
 
         <TextAreaGroup label="Message" placeholder="Type your message" />
 
-        <button className="mt-6 flex w-full justify-center rounded-lg bg-primary p-[13px] font-medium text-white hover:bg-opacity-90">
+        <button className="mt-4 flex w-full justify-center rounded-lg bg-primary p-[11px] font-medium text-white hover:bg-opacity-90">
           Send Message
         </button>
       </form>

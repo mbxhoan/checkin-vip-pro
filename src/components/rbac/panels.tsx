@@ -36,7 +36,7 @@ export function ToneBadge({
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold uppercase tracking-wide",
+        "inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide",
         BADGE_TONE_CLASSES[tone],
         className,
       )}
@@ -60,7 +60,7 @@ export function MetricCard({
   tone = "slate",
 }: MetricCardProps) {
   return (
-    <div className="rounded-[20px] border border-stroke bg-white p-5 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+    <div className="rounded-[18px] border border-stroke bg-white p-4 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
       <div className="flex items-start justify-between gap-3">
         <p className="text-sm font-medium text-dark-4 dark:text-dark-6">
           {label}
@@ -69,7 +69,7 @@ export function MetricCard({
       </div>
 
       <div className="mt-4 flex items-end justify-between gap-4">
-        <span className="text-3xl font-bold text-dark dark:text-white">
+        <span className="text-[1.75rem] font-bold text-dark dark:text-white">
           {value}
         </span>
       </div>
@@ -87,6 +87,7 @@ interface SectionCardProps {
   action?: ReactNode;
   children: ReactNode;
   className?: string;
+  id?: string;
 }
 
 export function SectionCard({
@@ -95,22 +96,24 @@ export function SectionCard({
   action,
   children,
   className,
+  id,
 }: SectionCardProps) {
   return (
     <section
+      id={id}
       className={cn(
-        "rounded-[20px] border border-stroke bg-white p-5 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card",
+        "rounded-[18px] border border-stroke bg-white p-4 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card",
         className,
       )}
     >
-      <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+      <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h3 className="text-xl font-bold text-dark dark:text-white">
+          <h3 className="text-lg font-bold text-dark dark:text-white">
             {title}
           </h3>
 
           {description ? (
-            <p className="mt-1 max-w-3xl text-sm text-dark-5 dark:text-dark-6">
+            <p className="mt-1 max-w-3xl text-[13px] text-dark-5 dark:text-dark-6">
               {description}
             </p>
           ) : null}

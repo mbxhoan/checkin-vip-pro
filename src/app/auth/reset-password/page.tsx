@@ -1,17 +1,32 @@
 import ResetPasswordForm from "@/components/Auth/ResetPasswordForm";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
+import { LocaleSwitcher } from "@/components/i18n/locale-switcher";
+import { getMessages } from "@/lib/i18n/messages";
+import { getLocale } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Reset password",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const messages = getMessages(locale);
 
-export default function ResetPasswordPage() {
+  return {
+    title: messages.common.resetPassword,
+  };
+}
+
+export default async function ResetPasswordPage() {
+  const locale = await getLocale();
+  const messages = getMessages(locale);
+
   return (
-    <>
-      <Breadcrumb pageName="Reset Password" />
+    <div className="space-y-4">
+      <div className="flex justify-end">
+        <LocaleSwitcher />
+      </div>
+
+      <Breadcrumb pageName={messages.common.resetPassword} />
 
       <div className="rounded-[10px] bg-white shadow-1 dark:bg-gray-dark dark:shadow-card">
         <div className="flex flex-wrap items-center">
@@ -40,16 +55,15 @@ export default function ResetPasswordPage() {
                 />
               </Link>
               <p className="mb-3 text-xl font-medium text-dark dark:text-white">
-                Complete recovery
+                {messages.auth.resetEyebrow}
               </p>
 
               <h1 className="mb-4 text-2xl font-bold text-dark dark:text-white sm:text-heading-3">
-                Choose a new password
+                {messages.auth.resetTitle}
               </h1>
 
               <p className="w-full max-w-[375px] font-medium text-dark-4 dark:text-dark-6">
-                Once your recovery link is validated, you can immediately set a
-                new password and return to the sign-in page.
+                {messages.auth.resetInstructions}
               </p>
 
               <div className="mt-31">
@@ -65,6 +79,6 @@ export default function ResetPasswordPage() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
